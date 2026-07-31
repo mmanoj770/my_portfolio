@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, FileText } from "lucide-react";
 import { protosemWeeks, getWeek } from "@/data/protosem";
 import { Reveal } from "@/components/Reveal";
@@ -62,6 +63,20 @@ export default async function WeekDocPage({
               {week.summary}
             </Reveal>
 
+            {week.hero && (
+              <Reveal delay={0.28} className="mt-8 overflow-hidden rounded-2xl border border-base-border">
+                <div className="relative aspect-[16/9] w-full">
+                  <Image
+                    src={week.hero}
+                    alt={week.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </Reveal>
+            )}
+
             <Reveal delay={0.3} className="mt-14">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">
                 Reflection
@@ -75,11 +90,11 @@ export default async function WeekDocPage({
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">
                 Learnings
               </p>
-              <ul className="mt-4 space-y-2">
+              <ul className="mt-4 space-y-3">
                 {week.learnings.map((l) => (
                   <li key={l} className="flex items-start gap-3 text-ink-muted">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-signal" />
-                    {l}
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                    <span className="leading-relaxed">{l}</span>
                   </li>
                 ))}
               </ul>
@@ -90,12 +105,19 @@ export default async function WeekDocPage({
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">
                   Gallery
                 </p>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  {week.gallery.map((g) => (
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {week.gallery.map((g, i) => (
                     <div
-                      key={g}
-                      className="aspect-video rounded-xl border border-base-border bg-base-surface"
-                    />
+                      key={i}
+                      className="group relative aspect-video overflow-hidden rounded-xl border border-base-border bg-base-surface"
+                    >
+                      <Image
+                        src={g}
+                        alt={`Orientation photo ${i + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
                   ))}
                 </div>
               </Reveal>
