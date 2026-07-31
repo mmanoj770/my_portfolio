@@ -19,7 +19,7 @@ const placeholder = (id: number): ProtosemWeek => ({
   learnings: [],
   hero: "/protosem/placeholder.jpg",
   gallery: [],
-  pdf: null,
+  pdf: `/pdfs/protosem-week-${id}.pdf`,
 });
 
 export const protosemWeeks: ProtosemWeek[] = [
@@ -40,7 +40,7 @@ export const protosemWeeks: ProtosemWeek[] = [
     ],
     hero: "/protosem/week-0-hero.jpg",
     gallery: ["/protosem/week-0-hero.jpg", "/protosem/week-0-1.jpg"],
-    pdf: null,
+    pdf: "/pdfs/protosem-week-0.pdf",
   },
   {
     id: 1,
@@ -59,7 +59,7 @@ export const protosemWeeks: ProtosemWeek[] = [
     ],
     hero: "/protosem/week-1-hero.jpg",
     gallery: ["/protosem/week-1-hero.jpg", "/protosem/week-1-1.jpg"],
-    pdf: null,
+    pdf: "/pdfs/protosem-week-1.pdf",
   },
   ...Array.from({ length: 19 }, (_, i) => placeholder(i + 2)),
 ];

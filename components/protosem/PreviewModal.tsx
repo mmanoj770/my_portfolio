@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight, Download, FileText } from "lucide-react";
 import { ProtosemWeek } from "@/data/protosem";
 
 export default function PreviewModal({
@@ -12,6 +12,8 @@ export default function PreviewModal({
   week: ProtosemWeek | null;
   onClose: () => void;
 }) {
+  const pdfUrl = week?.pdf || `/pdfs/protosem-week-${week?.id ?? 0}.pdf`;
+
   return (
     <AnimatePresence>
       {week && (
@@ -48,14 +50,28 @@ export default function PreviewModal({
               {week.summary}
             </p>
 
-            <Link
-              href={`/protosem/week/${week.id}`}
-              className="mt-8 inline-flex items-center gap-2 text-sm text-ink transition-colors hover:text-signal focus-ring"
-            >
-              Open full documentation
-              <ArrowUpRight size={16} />
-            </Link>
-            <p className="mt-3 font-mono text-xs text-ink-faint">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href={`/protosem/week/${week.id}`}
+                className="inline-flex items-center gap-2 rounded-full border border-base-border bg-base-surface px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-signal hover:text-signal focus-ring"
+              >
+                Open full documentation
+                <ArrowUpRight size={16} />
+              </Link>
+
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noreferrer"
+                download={`protosem-week-${week.id}.pdf`}
+                className="inline-flex items-center gap-2 rounded-full border border-signal/40 bg-signal/10 px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-signal hover:bg-signal/20 focus-ring"
+              >
+                <Download size={16} className="text-signal" />
+                Download PDF
+              </a>
+            </div>
+
+            <p className="mt-4 font-mono text-xs text-ink-faint">
               Tip: double-click a week to jump straight to documentation.
             </p>
           </motion.div>

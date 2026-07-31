@@ -123,18 +123,18 @@ export default async function WeekDocPage({
               </Reveal>
             )}
 
-            {week.pdf && (
-              <Reveal delay={0.45} className="mt-14">
-                <a
-                  href={week.pdf}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-base-border px-5 py-2.5 text-sm text-ink transition-colors hover:border-signal hover:text-signal focus-ring"
-                >
-                  <FileText size={16} /> Download week PDF
-                </a>
-              </Reveal>
-            )}
+            <Reveal delay={0.45} className="mt-14">
+              <a
+                href={week.pdf || `/pdfs/protosem-week-${week.id}.pdf`}
+                target="_blank"
+                rel="noreferrer"
+                download={`protosem-week-${week.id}.pdf`}
+                className="inline-flex items-center gap-2.5 rounded-full border border-signal/50 bg-signal/10 px-6 py-3 text-sm font-medium text-ink transition-all duration-300 hover:border-signal hover:bg-signal/20 focus-ring"
+              >
+                <FileText size={18} className="text-signal" />
+                <span>Download Week {week.id} PDF</span>
+              </a>
+            </Reveal>
           </>
         )}
       </div>
