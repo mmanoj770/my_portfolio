@@ -51,7 +51,7 @@ export const projects: Project[] = [
       "Produced a prediction service that narrows expected arrival windows and surfaces the routes most prone to delay.",
     cover: "/images/projects/train.jpg",
     accent: "#7C6FF0",
-    githubUrl: "https://github.com/mmanoj770/train-journey-time-prediction",
+    githubUrl: "https://github.com/mmanoj770/Train_Journey_Time_Prediction_System",
   },
   {
     slug: "discovery-agent",
