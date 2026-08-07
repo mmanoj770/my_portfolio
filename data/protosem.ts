@@ -61,7 +61,26 @@ export const protosemWeeks: ProtosemWeek[] = [
     gallery: ["/protosem/week-1-hero.jpg", "/protosem/week-1-1.jpg"],
     pdf: "/pdfs/protosem-week-1.pdf",
   },
-  ...Array.from({ length: 19 }, (_, i) => placeholder(i + 2)),
+  {
+    id: 2,
+    title: "Week 2 — Beyond Coding: Innovation, Design Thinking & Rapid Prototyping",
+    status: "complete",
+    summary:
+      "Week 2 broadened my understanding of software development by showing that creating impactful technology goes beyond writing code. Through sessions on LeanSpark, the Frugal Mindset, Design Thinking, visual programming, mobile app development, and collaborative problem-solving, I explored how innovation, creativity, and user-centered thinking are essential to building meaningful software solutions.",
+    reflection:
+      "This week changed my perspective on software engineering. I realized that developing software is not only about technical skills but also about understanding users, thinking creatively, collaborating effectively, and solving real-world problems. Every activity reinforced that innovation and design are just as important as coding in creating impactful products.",
+    learnings: [
+      "Learned the principles of LeanSpark and the Frugal Mindset, understanding how innovation can emerge from limited resources.",
+      "Participated in the Think Like a Coder Challenge, strengthening logical thinking, teamwork, and collaborative problem-solving.",
+      "Created a 2-minute animated story using Scratch, exploring computational thinking through visual programming.",
+      "Prototyped a functional Blood Donor mobile application using MIT App Inventor, gaining experience in rapid mobile app development.",
+      "Explored Applied Design Thinking, learning how empathy, ideation, prototyping, and testing contribute to user-centered software development.",
+    ],
+    hero: "",
+    gallery: [],
+    pdf: "/pdfs/protosem-week-2.pdf",
+  },
+  ...Array.from({ length: 18 }, (_, i) => placeholder(i + 3)),
 ];
 
 export function getWeek(id: number) {
