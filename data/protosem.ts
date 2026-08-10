@@ -93,21 +93,6 @@ export const protosemWeeks: ProtosemWeek[] = [
               text: "We applied these concepts practically by organizing our workspace as a team. We identified unnecessary materials, arranged the required items properly, cleaned the workspace, and maintained a systematic arrangement. From this activity, I understood that 5S is not simply about cleaning a workplace. It is about creating a habit of being organized, responsible, disciplined, and consistent. I also learned that an organized environment reduces confusion and helps a team work more efficiently.",
             },
             {
-              type: "image-grid",
-              images: [
-                {
-                  src: "/protosem/week-1-hero.jpg",
-                  alt: "5S Workspace Organization - Sorting components",
-                  caption: "Sorting and organizing hardware components into labeled trays",
-                },
-                {
-                  src: "/protosem/week-1-1.jpg",
-                  alt: "5S Workspace Organization - Team collaboration",
-                  caption: "Collaborating with teammates to organize workspace materials systematically",
-                },
-              ],
-            },
-            {
               type: "paragraph",
               text: "After the 5S activities, I moved towards building my personal professional portfolio. This was one of the most important activities for me during Week 1 because it required me to look at my own skills, projects, experiences, and future goals from a professional perspective.",
             },
@@ -118,6 +103,12 @@ export const protosemWeeks: ProtosemWeek[] = [
             {
               type: "paragraph",
               text: "The Home section was designed to provide a quick introduction about me. I added my name, my field of study, and a short description explaining that I am an Artificial Intelligence and Data Science student interested in building practical AI systems. I also added buttons for my Resume and Contact, making the important information easily accessible.",
+            },
+            {
+              type: "image",
+              src: "/protosem/portfolio-home.png",
+              alt: "Personal Portfolio - Home Hero Section",
+              caption: "Personal Portfolio - Home section showcasing introductory profile and navigation",
             },
             {
               type: "paragraph",
@@ -134,6 +125,12 @@ export const protosemWeeks: ProtosemWeek[] = [
             {
               type: "paragraph",
               text: "I also created an Experience section to document my professional and learning experiences. I structured it as a timeline so that my experiences could be viewed chronologically. This included my MySQL internship, virtual internship, and current AI engineering experience. Creating this section helped me understand the importance of documenting experiences and presenting them clearly rather than simply mentioning them on a resume.",
+            },
+            {
+              type: "image",
+              src: "/protosem/portfolio-experience.png",
+              alt: "Personal Portfolio - Experience Section Timeline",
+              caption: "Personal Portfolio - Experience section timeline",
             },
             {
               type: "paragraph",
@@ -163,6 +160,12 @@ export const protosemWeeks: ProtosemWeek[] = [
             {
               type: "paragraph",
               text: "The combination of 5S and portfolio building gave me a clear understanding of how organization can be applied in different areas. 5S helped me organize my workspace, while the portfolio helped me organize my skills, experiences, achievements, and learning journey. Both activities taught me that small, consistent improvements can gradually create a professional mindset.",
+            },
+            {
+              type: "image",
+              src: "/protosem/portfolio-about.png",
+              alt: "Personal Portfolio - About Section",
+              caption: "Personal Portfolio - About section documenting professional philosophy and profile",
             },
             {
               type: "paragraph",
