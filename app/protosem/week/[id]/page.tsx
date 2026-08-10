@@ -123,6 +123,98 @@ export default async function WeekDocPage({
               </Reveal>
             )}
 
+            {week.detailedSummary && (
+              <Reveal delay={0.42} className="mt-14 border-t border-base-border/40 pt-12">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">
+                  Detailed Summary of the Week
+                </p>
+                {week.detailedSummary.title && (
+                  <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                    {week.detailedSummary.title}
+                  </h2>
+                )}
+                <div className="mt-8 space-y-10">
+                  {week.detailedSummary.sections.map((sec, i) => (
+                    <div key={i} className="space-y-4">
+                      {sec.heading && (
+                        <h3 className="font-display text-xl font-semibold tracking-tight text-ink pt-6 border-t border-base-border/30">
+                          {sec.heading}
+                        </h3>
+                      )}
+                      
+                      {sec.content ? (
+                        <div className="space-y-5">
+                          {sec.content.map((block, j) => {
+                            if (block.type === "paragraph") {
+                              return (
+                                <p key={j} className="text-base leading-relaxed text-ink-muted">
+                                  {block.text}
+                                </p>
+                              );
+                            }
+                            if (block.type === "image") {
+                              return (
+                                <div key={j} className="my-6 overflow-hidden rounded-2xl border border-base-border bg-base-surface">
+                                  <div className="relative aspect-[16/9] w-full">
+                                    <Image
+                                      src={block.src}
+                                      alt={block.alt || week.title}
+                                      fill
+                                      className="object-cover"
+                                    />
+                                  </div>
+                                  {block.caption && (
+                                    <p className="px-4 py-2.5 font-mono text-xs text-ink-faint border-t border-base-border/40 bg-base-raised/50">
+                                      {block.caption}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            }
+                            if (block.type === "image-grid") {
+                              return (
+                                <div key={j} className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                  {block.images.map((img, imgIdx) => (
+                                    <div
+                                      key={imgIdx}
+                                      className="group overflow-hidden rounded-2xl border border-base-border bg-base-surface"
+                                    >
+                                      <div className="relative aspect-video w-full">
+                                        <Image
+                                          src={img.src}
+                                          alt={img.alt || week.title}
+                                          fill
+                                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                      </div>
+                                      {img.caption && (
+                                        <p className="px-4 py-2.5 font-mono text-xs text-ink-faint border-t border-base-border/40 bg-base-raised/50">
+                                          {img.caption}
+                                        </p>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {sec.paragraphs?.map((p, j) => (
+                            <p key={j} className="text-base leading-relaxed text-ink-muted">
+                              {p}
+                            </p>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
+
             <Reveal delay={0.45} className="mt-14">
               <a
                 href={week.pdf || `/pdfs/protosem-week-${week.id}.pdf`}
