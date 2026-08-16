@@ -191,9 +191,77 @@ export const protosemWeeks: ProtosemWeek[] = [
       "Prototyped a functional Blood Donor mobile application using MIT App Inventor, gaining experience in rapid mobile app development.",
       "Explored Applied Design Thinking, learning how empathy, ideation, prototyping, and testing contribute to user-centered software development.",
     ],
-    hero: "",
-    gallery: [],
+    hero: "/protosem/week-2-hero.jpg",
+    gallery: [
+      "/protosem/week-2-hero.jpg",
+      "/protosem/week-2-scratch.png",
+      "/protosem/week-2-appinventor-1.png",
+      "/protosem/week-2-appinventor-2.png",
+    ],
     pdf: "/pdfs/protosem-week-2.pdf",
+    detailedSummary: {
+      title: "Week 2 – Beyond Coding: Innovation, Design Thinking & Rapid Prototyping",
+      sections: [
+        {
+          heading: "Collaborative Learning & Frugal Mindset",
+          content: [
+            {
+              type: "paragraph",
+              text: "The week started with interactive sessions on LeanSpark and the Frugal Mindset, emphasizing how innovative solutions can emerge from resource constraints. Working together in teams for the 'Think Like a Coder' challenge, we honed our logical thinking, communication, and collaborative problem-solving skills.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-2-hero.jpg",
+              alt: "Collaborative problem-solving classroom session",
+              caption: "Collaborative problem-solving and teamwork session during Protosem Week 2",
+            },
+          ],
+        },
+        {
+          heading: "Visual Programming with Scratch",
+          content: [
+            {
+              type: "paragraph",
+              text: "To explore computational thinking and core programming concepts without syntax friction, we developed interactive projects using Scratch. We designed custom game logic, dynamic scoring, life counters, and sprite interactions.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-2-scratch.png",
+              alt: "Scratch Project - Interactive Game & Animated Story",
+              caption: "Scratch visual programming project featuring custom sprites, scoring mechanics, and game loops",
+            },
+          ],
+        },
+        {
+          heading: "Rapid Mobile App Prototyping with MIT App Inventor",
+          content: [
+            {
+              type: "paragraph",
+              text: "Applying our learnings to mobile applications, we used MIT App Inventor to prototype 'BloodConnect'—an application designed to connect blood donors with people in urgent need of blood.",
+            },
+            {
+              type: "paragraph",
+              text: "The prototype includes a Blood Donor Registration screen with GPS location sensor integration, phone number validation, and blood group selection, as well as a Request Blood interface to search for nearby donor matches.",
+            },
+            {
+              type: "image-grid",
+              images: [
+                {
+                  src: "/protosem/week-2-appinventor-1.png",
+                  alt: "BloodConnect App - Donor Registration Screen",
+                  caption: "MIT App Inventor - Donor Registration interface with GPS location sensor integration",
+                },
+                {
+                  src: "/protosem/week-2-appinventor-2.png",
+                  alt: "BloodConnect App - Request Blood Screen",
+                  caption: "MIT App Inventor - Request Blood interface for searching matching blood donors",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
   ...Array.from({ length: 18 }, (_, i) => placeholder(i + 3)),
 ];
