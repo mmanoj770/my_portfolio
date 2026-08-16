@@ -263,9 +263,133 @@ export const protosemWeeks: ProtosemWeek[] = [
       ],
     },
   },
-  ...Array.from({ length: 18 }, (_, i) => placeholder(i + 3)),
+  {
+    id: 3,
+    title: "Week 3 — Electronics Fundamentals & 3D Product Design",
+    status: "complete",
+    summary:
+      "Week 3 of ProtoSem focused on two major areas: understanding the fundamentals of electronics and developing practical CAD modelling skills using Autodesk Fusion 360. The sessions connected engineering theory with practical design and prototyping.",
+    reflection:
+      "Week 3 was an important step in my ProtoSem journey because it combined electronics fundamentals with practical CAD design. I learned how electrical concepts such as voltage, current, and resistance form the foundation of electronic systems, while Fusion 360 gave me practical experience in designing and visualising physical components. The CAD exercises also taught me that a good 3D model begins with a well-defined and accurately dimensioned sketch.",
+    learnings: [
+      "Understood electrical current generation, transmission, voltage, resistance, and Ohm's Law (V = I × R).",
+      "Studied key electronic components including resistors, capacitors, and diodes and their roles in circuits.",
+      "Developed 2D dimensioned sketches in Autodesk Fusion 360 using geometric constraints and parametric modeling.",
+      "Modeled complex mechanical components incorporating mounting holes, vertical brackets, and structural supports.",
+      "Created 3D product models including a microphone, paper rocket, and water bottle from concept to final CAD visualization.",
+    ],
+    hero: "/protosem/week-3-hero.jpg",
+    gallery: [
+      "/protosem/week-3-hero.jpg",
+      "/protosem/week-3-sketch.png",
+      "/protosem/week-3-modelpart.png",
+      "/protosem/week-3-microphone.png",
+      "/protosem/week-3-rocket.png",
+    ],
+    pdf: "/pdfs/protosem-week-3.pdf",
+    detailedSummary: {
+      title: "Week 3 – Electronics Fundamentals & 3D Product Design",
+      sections: [
+        {
+          heading: "1. Electronics Fundamentals & Basic Components",
+          content: [
+            {
+              type: "paragraph",
+              text: "The first part of the week focused on understanding the fundamentals of electricity and electronic circuits. I learned the basic concepts of how electrical current is generated and transmitted through conductors. An electrical circuit requires a source of electrical potential, a conducting path, and a load through which current can flow.",
+            },
+            {
+              type: "paragraph",
+              text: "We studied the relationship between Voltage (V), Current (I), and Resistance (R) defined by Ohm's Law: V = I × R. From this relationship (I = V / R), I understood that when voltage remains constant, increasing resistance decreases current, while decreasing resistance increases current.",
+            },
+            {
+              type: "paragraph",
+              text: "We also covered key electronic components: Resistors (to limit or control current flow), Capacitors (to temporarily store electrical energy, filter, and smooth circuits), and Diodes (semiconductors allowing unidirectional current flow).",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-3-hero.jpg",
+              alt: "Interactive discussion during ProtoSem Week 3",
+              caption: "Participating in discussions and interactive learning sessions during ProtoSem Week 3",
+            },
+          ],
+        },
+        {
+          heading: "2. Introduction to Autodesk Fusion 360 & Dimensioned Sketching",
+          content: [
+            {
+              type: "paragraph",
+              text: "The second major part of Week 3 involved Autodesk Fusion 360, focusing on practical skills in 2D sketching, dimensions, constraints, and 3D modeling. The workflow followed: Concept → 2D Sketch → Dimensions & Constraints → 3D Features → Final Model.",
+            },
+            {
+              type: "paragraph",
+              text: "A key exercise was creating a detailed dimensioned sketch containing multiple circles, profiles, hole sizes, linear/diameter/radius dimensions (such as Ø10, Ø14, Ø28, Ø38, Ø50.80, Ø76), and geometric constraints. This demonstrated that accurate CAD modeling starts with a properly defined 2D sketch.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-3-sketch.png",
+              alt: "Fusion 360 - Dimensioned 2D Sketch",
+              caption: "Autodesk Fusion 360 - Fully constrained and dimensioned 2D sketch (Ø10 to Ø178)",
+            },
+          ],
+        },
+        {
+          heading: "3. Mechanical Component & Tool Design",
+          content: [
+            {
+              type: "paragraph",
+              text: "I worked on a complex mechanical component in Fusion 360 featuring a base plate, multiple mounting holes, cylindrical features, vertical brackets, and structural supports. This exercise improved my understanding of feature-based modeling, mechanical part design, hole placement, structural reinforcement, and custom decals.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-3-modelpart.png",
+              alt: "Fusion 360 - Mechanical Tool Component Design",
+              caption: "Autodesk Fusion 360 - 3D Mechanical part model with mounting holes and structural supports",
+            },
+          ],
+        },
+        {
+          heading: "4. 3D Product Prototyping (Microphone, Rocket & Bottle)",
+          content: [
+            {
+              type: "paragraph",
+              text: "We also designed various 3D product models in Fusion 360:",
+            },
+            {
+              type: "paragraph",
+              text: "• Microphone Model: Combines a cylindrical main body, rounded lower section, circular detailing, top dome, and realistic material rendering.",
+            },
+            {
+              type: "paragraph",
+              text: "• Paper Rocket Model: Features a central rocket body with aerodynamic fins positioned around the main body.",
+            },
+            {
+              type: "paragraph",
+              text: "• Water Bottle Model: Explored real-world product modeling, cylindrical proportions, and smooth curved surfaces.",
+            },
+            {
+              type: "image-grid",
+              images: [
+                {
+                  src: "/protosem/week-3-microphone.png",
+                  alt: "Fusion 360 - Microphone 3D Model",
+                  caption: "Microphone 3D CAD model with custom material rendering",
+                },
+                {
+                  src: "/protosem/week-3-rocket.png",
+                  alt: "Fusion 360 - Paper Rocket Model",
+                  caption: "Paper rocket 3D CAD model featuring body and aerodynamic fins",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  ...Array.from({ length: 17 }, (_, i) => placeholder(i + 4)),
 ];
 
 export function getWeek(id: number) {
   return protosemWeeks.find((w) => w.id === id);
 }
+
