@@ -386,7 +386,125 @@ export const protosemWeeks: ProtosemWeek[] = [
       ],
     },
   },
-  ...Array.from({ length: 17 }, (_, i) => placeholder(i + 4)),
+  {
+    id: 4,
+    title: "Week 4 — A Week of Designing, Making and Choosing",
+    status: "complete",
+    summary:
+      "Week 4 was a combination of technical learning, mechanical design, laser cutting, animation, and 3D printing, alongside an intense and chaotic Marketplace event where we selected visionaries and challenge statements for the rest of ProtoSem.",
+    reflection:
+      "Marketplace taught me that teamwork is not always about getting exactly what you want. Sometimes you have to adapt, communicate, compromise, and find another way forward. Decision-making becomes challenging when opinions and personal interests run high, but staying adaptable leads to great outcomes.",
+    learnings: [
+      "Continued mechanical design in Fusion 360, designing a water bottle and learning software debugging with peer mentorship.",
+      "Learned laser cutting fundamentals, prepared SVG/vector files in RDWorks, and cut a Mayan inscription symbol in DFab Lab #2.",
+      "Explored animation and mechanisms, using joints and motion constraints to recreate mechanical assembly interactions.",
+      "Introduced to 3D printing workflows on the Bambu Lab printer using Bambu Studio to design a custom enclosure for the BMS HW-375 electrical component.",
+      "Navigated the intense Marketplace event: participated in visionary leadership selection, peer nominations, and multi-round voting to form 18 visionaries.",
+      "Negotiated challenge statement selection, compromised under high pressure without phone access, and successfully joined a financial-related problem statement team.",
+    ],
+    hero: "/protosem/week-4-hero.jpg",
+    gallery: [
+      "/protosem/week-4-hero.jpg",
+      "/protosem/week-4-mentorship.jpg",
+      "/protosem/week-4-lasercut.jpg",
+      "/protosem/week-4-cad.jpg",
+    ],
+    pdf: "/pdfs/protosem-week-4.pdf",
+    detailedSummary: {
+      title: "Week 4 – A Week of Designing, Making and Choosing",
+      sections: [
+        {
+          heading: "Mechanical Design & Peer Debugging",
+          content: [
+            {
+              type: "paragraph",
+              text: "We started the week by continuing our mechanical design sessions, where we were asked to design a water bottle. Initially, I faced a few difficulties while working on the design and had trouble understanding some of the tools and errors in the software.",
+            },
+            {
+              type: "paragraph",
+              text: "My friend Mitra patiently taught me how to use the software, which tools to use, why certain errors were occurring, and how to debug them. His guidance helped me understand the software much better. Once I became more comfortable with it, I was able to use what I had learned to help my friends and fellow teammates with their own designs. This was a great experience because teaching others also helped me strengthen my own understanding.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-4-mentorship.jpg",
+              alt: "Peer Mentorship Session in Fusion 360",
+              caption: "Peer mentorship in action: Learning Fusion 360 tools, error debugging, and mechanical design with Mitra",
+            },
+          ],
+        },
+        {
+          heading: "Laser Cutting & Digital Fabrication (Mayan Inscription)",
+          content: [
+            {
+              type: "paragraph",
+              text: "On Tuesday, we were introduced to laser cutting. We received an overview of how laser cutting works, the different steps involved, and the software we would be using.",
+            },
+            {
+              type: "paragraph",
+              text: "We were then asked to choose a unique design, import it into RDWorks, and cut it using the laser cutting machine in DFab Lab #2. I chose a symbol that looked similar to a Mayan inscription because of its unusual shape and appearance. After setting it up in RDWorks and sending it to the machine, I was able to cut it successfully. Seeing the final result was satisfying because I could physically hold something that I had designed and prepared digitally.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-4-lasercut.jpg",
+              alt: "Laser Cut Mayan Inscription Symbol",
+              caption: "Finished laser-cut Mayan inscription symbol cut on acrylic in DFab Lab #2 using RDWorks",
+            },
+          ],
+        },
+        {
+          heading: "Animation, Mechanisms & 3D Printing (BMS HW-375 Enclosure)",
+          content: [
+            {
+              type: "paragraph",
+              text: "On Wednesday, we were introduced to animation and mechanisms. We were asked to choose a mechanism tutorial and recreate it using joints and animations. This helped me understand how different components interact with each other and how motion can be represented digitally. It was interesting to see how something that looks simple from the outside can involve several different joints and movements when recreated in design software.",
+            },
+            {
+              type: "paragraph",
+              text: "On Thursday, we explored 3D printing. We were given an overview of how 3D printing works, the different types of 3D printers, and their various applications. We were also introduced to the Bambu Lab 3D printer and learned how to use Bambu Studio to prepare models for printing. For the activity, we had to choose a sensor or electrical component and design an enclosure for it. I chose the BMS HW-375 as my component and designed an enclosure around it. This activity helped me understand the importance of considering physical dimensions and practical requirements when designing component housings.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-4-cad.jpg",
+              alt: "Mechanical CAD Modeling & Prototyping Lab Session",
+              caption: "Working on 2D sketches, CAD models, and component enclosures during lab sessions",
+            },
+          ],
+        },
+        {
+          heading: "Marketplace: Visionaries Selection & Challenge Statement Allocation",
+          content: [
+            {
+              type: "paragraph",
+              text: "Then came Friday, which was by far the most eventful day of the week: Marketplace.",
+            },
+            {
+              type: "paragraph",
+              text: "At first, I thought Marketplace was going to be a fun activity lasting throughout the day. However, it turned out to be the crucial event where we chose our visionaries and challenge statements, determining the teams and problems we would work on for the rest of ProtoSem.",
+            },
+            {
+              type: "paragraph",
+              text: "The first part was selecting visionaries. 26 students interested in becoming visionaries stepped forward. We explained our leadership vision, nominated peers based on capability, and identified areas of readiness. Through three intense rounds of voting and debate, 8 candidates were eliminated, leaving the final group of 18 visionaries.",
+            },
+            {
+              type: "paragraph",
+              text: "Then came the second, chaotic part: choosing from 15 challenge statements. We surrendered our phones and relied strictly on physical notes. As visionaries competed for identical statements, debates grew intense. At one point, I was given only a couple of minutes to convince others or forfeit my statement. Eventually, I joined another team led by a friend, working on a financial-related problem statement.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-4-hero.jpg",
+              alt: "Collaborative Lab Workspace and Marketplace Session",
+              caption: "Collaborative lab workspace during ProtoSem Week 4 Marketplace and team sessions",
+            },
+            {
+              type: "paragraph",
+              text: "Although Marketplace was chaotic, stressful, and intense, I enjoyed the experience. It taught me that teamwork is about adapting, communicating, and compromising. I am happy with the outcome and excited to tackle our financial challenge statement with a fantastic team in the coming weeks of ProtoSem!",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  ...Array.from({ length: 16 }, (_, i) => placeholder(i + 5)),
 ];
 
 export function getWeek(id: number) {
