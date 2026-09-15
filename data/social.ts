@@ -18,5 +18,6 @@ export const nav = [
   { label: "Skills", href: "/skills" },
   { label: "Experience", href: "/experience" },
   { label: "Protosem", href: "/protosem" },
+  { label: "IoT Session", href: "/iot" },
   { label: "About", href: "/about" },
 ];
