@@ -27,152 +27,91 @@ export type IoTSession = {
   };
 };
 
-const placeholder = (id: number): IoTSession => ({
-  id,
-  title: `IoT Session ${id}`,
-  status: "placeholder",
-  summary: "This IoT session log has not been published yet.",
-  reflection: "Coming soon.",
-  learnings: [],
-  tags: ["IoT", "Hardware"],
-  hero: "/images/iot-placeholder.jpg",
-  gallery: [],
-  pdf: `/pdfs/iot-session-${id}.pdf`,
-});
-
 export const iotSessions: IoTSession[] = [
   {
     id: 1,
-    title: "Session 1 — Fundamentals of IoT & Sensor Interfacing",
-    date: "Phase 1",
+    title: "Task 1 — HTTP LED Web Control",
+    date: "Day 1",
     status: "complete",
-    tags: ["IoT Architecture", "Arduino", "Sensors", "Electronics"],
+    tags: ["ESP32", "HTTP REST", "Wi-Fi", "GPIO", "Embedded Web Server"],
     summary:
-      "An introduction to Internet of Things (IoT) architecture, hardware platforms, and real-time sensor data acquisition using microcontrollers.",
+      "Local network web control server running directly on ESP32 to switch digital outputs via HTTP REST endpoints.",
     reflection:
-      "Understanding hardware-software interaction at the signal level is critical for reliable IoT applications. Interfacing analog and digital sensors gave me hands-on insight into raw data processing before sending values to edge units.",
+      "Local HTTP server response times were ultra-low (<150ms) because requests stay within the local Wi-Fi subnet without external routing.",
     learnings: [
-      "Explored core IoT architecture layers: Perception, Network, Middleware, and Application layers.",
-      "Configured microcontrollers (Arduino / ESP32) for GPIO pin control and sensor reading.",
-      "Interfaced temperature, humidity (DHT11/DHT22), and ultrasonic distance sensors.",
-      "Implemented signal filtering and debouncing logic for clean sensor telemetry.",
-      "Built a basic local serial monitor monitoring tool for real-time sensor analytics.",
+      "Configured ESP32 Wi-Fi station mode and WebServer.h endpoint routing.",
+      "Handled HTTP GET requests for /api/on and /api/off with plain text replies.",
+      "Controlled onboard GPIO 2 blue LED cleanly based on REST callbacks.",
+      "Implemented polling on front-end web dashboard for real-time status monitoring.",
     ],
-    hero: "/images/iot-session-1.jpg",
-    gallery: ["/images/iot-session-1.jpg"],
+    hero: "/media/iot/task1/board.jpg",
+    gallery: ["/media/iot/task1/board.jpg", "/media/iot/task1/on.jpg", "/media/iot/task1/off.jpg"],
     pdf: "/pdfs/iot-session-1.pdf",
-    detailedSummary: {
-      title: "Session 1 – Fundamentals of IoT & Sensor Interfacing",
-      sections: [
-        {
-          heading: "1. Overview of IoT System Architecture",
-          content: [
-            {
-              type: "paragraph",
-              text: "The IoT ecosystem bridges physical devices with digital analytical platforms. In this initial session, we explored the complete stack of IoT architecture: physical sensing, embedded processing, wireless transport, and cloud services.",
-            },
-            {
-              type: "paragraph",
-              text: "We analyzed how sensors convert physical quantities into electrical signals, which are then sampled by analog-to-digital converters (ADC) inside embedded microcontrollers.",
-            },
-          ],
-        },
-        {
-          heading: "2. Hands-on Sensor Interfacing & Telemetry",
-          content: [
-            {
-              type: "paragraph",
-              text: "Using ESP32 and Arduino development boards, we connected digital temperature/humidity sensors and ultrasonic proximity sensors. We calibrated analog inputs and built custom signal smoothing algorithms to eliminate noise.",
-            },
-          ],
-        },
-      ],
-    },
   },
   {
     id: 2,
-    title: "Session 2 — Microcontrollers & Embedded Wireless Protocols",
-    date: "Phase 2",
+    title: "Task 2 — MQTT Cloud Dashboard with Relay Control",
+    date: "Day 2",
     status: "complete",
-    tags: ["ESP32", "MQTT", "Wi-Fi", "WebSockets"],
+    tags: ["MQTT", "Adafruit IO", "Relay", "230V Mains", "Pub/Sub"],
     summary:
-      "Deep dive into ESP32 microcontroller features, Wi-Fi networking, and lightweight IoT protocols like MQTT and HTTP/WebSockets for microsecond messaging.",
+      "Remote publish-subscribe control enabling switching of high-voltage 230V loads from anywhere on the internet using Adafruit IO.",
     reflection:
-      "MQTT's publish-subscribe paradigm drastically simplifies device-to-broker communication over high-latency network conditions compared to traditional HTTP polling.",
+      "MQTT's light packet overhead drastically reduces bandwidth consumption compared to HTTP, making it ideal for remote IoT control.",
     learnings: [
-      "Configured ESP32 Wi-Fi station mode and access point mode for direct device configuration.",
-      "Implemented MQTT client using Mosquitto broker for low-overhead publish-subscribe telemetry.",
-      "Handled Quality of Service (QoS) levels and Retained Messages for state persistence.",
-      "Created lightweight REST endpoints on embedded chips for remote configuration.",
+      "Connected ESP32 MQTT client to Adafruit IO cloud broker over Wi-Fi.",
+      "Subscribed to topic feeds and processed real-time payload updates.",
+      "Safely wired a 5V relay module to switch a 230V AC mains incandescent bulb.",
+      "Ensured proper high-voltage physical isolation and active-HIGH switching logic.",
     ],
-    hero: "/images/iot-session-2.jpg",
-    gallery: ["/images/iot-session-2.jpg"],
+    hero: "/media/iot/task2/dashboard.jpg",
+    gallery: ["/media/iot/task2/dashboard.jpg", "/media/iot/task2/relay.jpg", "/media/iot/task2/bulb-on.jpg"],
     pdf: "/pdfs/iot-session-2.pdf",
-    detailedSummary: {
-      title: "Session 2 – Microcontrollers & Embedded Wireless Protocols",
-      sections: [
-        {
-          heading: "1. Wireless Connectivity & ESP32 Stack",
-          content: [
-            {
-              type: "paragraph",
-              text: "ESP32 offers dual-core processing along with built-in Wi-Fi and Bluetooth LE. We configured freeRTOS tasks to separate sensor polling from network transmission, preventing network blocking on time-critical sensor reads.",
-            },
-          ],
-        },
-        {
-          heading: "2. MQTT Publish-Subscribe Pattern",
-          content: [
-            {
-              type: "paragraph",
-              text: "We established MQTT topic structures (e.g., home/sensors/temperature) and verified real-time payload transmission to a centralized MQTT broker with minimal latency.",
-            },
-          ],
-        },
-      ],
-    },
   },
   {
     id: 3,
-    title: "Session 3 — Cloud IoT Integration & Real-time Dashboards",
-    date: "Phase 3",
+    title: "Task 3 — Google Assistant Voice Control via IFTTT",
+    date: "Day 3",
     status: "complete",
-    tags: ["Cloud IoT", "Node-RED", "Grafana", "Time-Series DB"],
+    tags: ["Google Assistant", "IFTTT", "Webhooks", "Voice API", "Automation"],
     summary:
-      "Connecting edge IoT nodes to cloud services, storing time-series telemetry in databases, and visualizing system states via interactive dashboards.",
+      "Hands-free voice automation bridging Google Assistant voice intents through IFTTT webhooks directly to the MQTT feed.",
     reflection:
-      "Visualization turns raw sensor feeds into actionable operational insights. Integrating Node-RED and Grafana allowed dynamic monitoring of system thresholds.",
+      "Chaining voice recognition to webhooks demonstrates how multi-protocol IoT pipelines connect user interfaces to physical hardware.",
     learnings: [
-      "Streamed sensor metrics from ESP32 to cloud dashboards via MQTT websockets.",
-      "Structured time-series data storage for continuous environmental telemetry.",
-      "Configured automated alert notifications when values breach operating thresholds.",
-      "Designed an interactive control panel for toggling physical actuators remotely.",
+      "Created IFTTT Applets triggered by Google Assistant voice phrases.",
+      "Configured Webhook POST requests delivering JSON payloads to Adafruit IO REST endpoints.",
+      "Mapped voice intents to existing MQTT hardware topics with zero firmware changes.",
+      "Achieved sub-3-second end-to-end latency from spoken phrase to physical bulb actuation.",
     ],
-    hero: "/images/iot-session-3.jpg",
-    gallery: ["/images/iot-session-3.jpg"],
+    hero: "/media/iot/task3/voice.jpg",
+    gallery: ["/media/iot/task3/voice.jpg", "/media/iot/task3/applet.jpg"],
     pdf: "/pdfs/iot-session-3.pdf",
   },
   {
     id: 4,
-    title: "Session 4 — Actuators, Relays & Industrial Automation",
-    date: "Phase 4",
+    title: "Task 4 — Forge Full-Stack Smart Home Platform",
+    date: "Intermediate",
     status: "complete",
-    tags: ["Actuators", "Relays", "Motor Drivers", "Edge Automation"],
+    tags: ["Firebase RTDB", "DHT11", "LDR", "React / Web Dashboard", "Full Stack"],
     summary:
-      "Controlling high-voltage hardware loads safely using optical isolation relays, motor drivers, and automated closed-loop feedback systems.",
+      "Full-stack smart home solution streaming environmental telemetry (temperature, humidity, light) to Firebase with real-time web control.",
     reflection:
-      "Closing the loop between sensor input and physical actuation is where IoT delivers true automation. Safety precautions with relay isolation are vital when interfacing with high currents.",
+      "Forge unifies edge sensing, cloud database synchronization, and modern front-end web control into a robust real-time automation ecosystem.",
     learnings: [
-      "Wired optocoupler-isolated relay modules to switch high-power loads safely.",
-      "Utilized Pulse Width Modulation (PWM) for precise DC motor and LED brightness control.",
-      "Designed closed-loop PID control logic for target temperature regulation.",
-      "Implemented hardware watchdog timers to automatically recover from system freezes.",
+      "Interfaced digital DHT11 and analog LDR sensors on ESP32 with 15-sample noise smoothing.",
+      "Established bi-directional WebSocket streaming with Firebase Realtime Database.",
+      "Built a modern responsive web dashboard with live gauge cards, manual toggle, mode switch, and CSV data export.",
+      "Implemented automatic threshold-driven lighting logic alongside manual override controls.",
     ],
-    hero: "/images/iot-session-4.jpg",
-    gallery: ["/images/iot-session-4.jpg"],
+    hero: "/media/iot/task4-dash/dashboard-full.jpg",
+    gallery: [
+      "/media/iot/task4-hw/breadboard.jpg",
+      "/media/iot/task4-dash/dashboard-full.jpg",
+      "/media/iot/task4-cloud/rtdb-console.jpg",
+    ],
     pdf: "/pdfs/iot-session-4.pdf",
   },
-  ...Array.from({ length: 6 }, (_, i) => placeholder(i + 5)),
 ];
 
 export function getIoTSession(id: number): IoTSession | undefined {
