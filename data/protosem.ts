@@ -504,7 +504,169 @@ export const protosemWeeks: ProtosemWeek[] = [
       ],
     },
   },
-  ...Array.from({ length: 16 }, (_, i) => placeholder(i + 5)),
+  {
+    id: 5,
+    title: "Week 5 — UI/UX Design & Customer Discovery",
+    status: "complete",
+    summary:
+      "Week 5 centered on the foundations of product design and customer validation, bridging UI/UX principles with real-world user research. The week progressed from design tool exploration into direct stakeholder engagement, culminating in a completed Challenge Brief Document for the Lost & Found Recovery System and an introduction to project management frameworks.",
+    reflection:
+      "Good design begins with understanding the user and framing the right problem — not with visuals alone. Direct customer conversations surface insights that internal brainstorming cannot replicate, and a well-defined Challenge Brief aligns a team around a shared problem and helps prevent scope creep during execution.",
+    learnings: [
+      "Good design begins with understanding the user and framing the right problem — not with visuals alone.",
+      "Figma and FigJam are effective for translating abstract ideas into tangible wireframes and collaborative flows before development begins.",
+      "Designing to user requirements, rather than personal preference, is a core discipline of UI/UX practice.",
+      "Direct customer conversations surface insights that internal brainstorming cannot replicate.",
+      "A well-defined Challenge Brief aligns a team around a shared problem and helps prevent scope creep during execution.",
+    ],
+    hero: "/protosem/week-5-hero.jpg",
+    gallery: [
+      "/protosem/week-5-hero.jpg",
+      "/protosem/week-5-figjam.png",
+      "/protosem/week-5-figma.png",
+      "/protosem/week-5-team.jpg",
+      "/protosem/week-5-pm.jpg",
+    ],
+    pdf: "/pdfs/protosem-week-5.pdf",
+    detailedSummary: {
+      title: "Week 5 — UI/UX Design & Customer Discovery",
+      sections: [
+        {
+          heading: "Introduction to UI/UX Design & Prototyping Tools",
+          content: [
+            {
+              type: "paragraph",
+              text: "The week opened with an introduction to UI/UX design thinking, including a hands-on challenge to build a website to a defined set of user requirements. This was paired with exploration of Figma and FigJam for wireframing, prototyping, and collaborative ideation.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-5-figjam.png",
+              alt: "FigJam Research Board for Lost & Found Problem Statement",
+              caption: "FigJam Research Board: Mapping out problem statements, stakeholder interview process, findings, and existing solution gaps for lost items",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-5-figma.png",
+              alt: "Figma Workspace & Recent Files Dashboard",
+              caption: "Figma & FigJam Dashboard: Creating wireframes, sitemaps, and collaborative flows for product design",
+            },
+          ],
+        },
+        {
+          heading: "User Research, Customer Meetings & Partner Sessions",
+          content: [
+            {
+              type: "paragraph",
+              text: "Mid-week, focus shifted to user research: structured feedback forms were designed and distributed to gather insights on our project concept from potential users, alongside a marketplace session where partner companies presented live industry problem statements.",
+            },
+            {
+              type: "paragraph",
+              text: "The week's key milestone was a direct customer meeting, where we presented our concept and gathered feedback to test our assumptions against real stakeholder expectations. Direct customer conversations surfaced critical insights that internal brainstorming could not replicate.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-5-team.jpg",
+              alt: "Customer Discovery & Team Collaboration Session",
+              caption: "Direct stakeholder engagement & team collaboration during customer discovery and research analysis",
+            },
+          ],
+        },
+        {
+          heading: "Project Brief: Lost & Found Recovery System",
+          content: [
+            {
+              type: "paragraph",
+              text: "The primary project focus established during Week 5 is the Lost & Found Recovery System. Lost-and-found infrastructure already exists in most institutions (physical desks, security offices, WhatsApp groups), but the infrastructure is passive, unindexed, and undiscoverable.",
+            },
+            {
+              type: "paragraph",
+              text: "Key problems identified include lack of searchable digital logs, absence of owner verification mechanisms, zero status visibility for losers, and reporting friction for finders. Target user segments span students on college campuses, public transport commuters, event attendees, and venue security staff.",
+            },
+            {
+              type: "paragraph",
+              text: "The proposed solution introduces a 5-pillar architecture: (1) Fast reporting flow with category/location/photo metadata, (2) Automatic matching engine connecting lost and found reports, (3) Ownership verification questions before handover, (4) Real-time status tracking (Reported → Under Review → Match Found → Verified → Recovered), and (5) Searchable institutional admin dashboard to replace physical paper logbooks.",
+            },
+          ],
+        },
+        {
+          heading: "Project Management Fundamentals & Challenge Brief Completion",
+          content: [
+            {
+              type: "paragraph",
+              text: "The week closed with the completion of a formal Challenge Brief Document, defining the core problem, target user segment, key discovery insights, and proposed solution direction to serve as the guiding reference for the project.",
+            },
+            {
+              type: "paragraph",
+              text: "Additionally, we attended a seminar on Project Management fundamentals, covering PM skill triangles, risk management, stakeholder communication, and servant leadership principles essential for leading engineering teams.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-5-pm.jpg",
+              alt: "Project Management Seminar",
+              caption: "Interactive seminar on Project Management fundamentals, PM talent triangle, role responsibilities, and servant leadership",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: 6,
+    title: "Week 6 — Project Planning, UI/UX & Embedded Hardware",
+    status: "complete",
+    summary:
+      "Week 6 combined structured product planning with an introduction to embedded hardware, connecting software-oriented design thinking with physical electronics through a hands-on soldering session.",
+    reflection:
+      "Early implementation planning surfaces ambiguities in a solution before any development work begins. Mindmaps, sitemaps, and wireframes are complementary artefacts that together form a complete picture of a product's design, while building a functioning circuit by hand makes abstract electronics concepts tangible.",
+    learnings: [
+      "Early implementation planning surfaces ambiguities in a solution before any development work begins.",
+      "Mindmaps, sitemaps, and wireframes are complementary artefacts that together form a complete picture of a product's design.",
+      "A working understanding of power, voltage, and current is essential context for anyone operating at the intersection of software and hardware.",
+      "Building a functioning circuit by hand made abstract electronics concepts tangible and reinforced core engineering fundamentals.",
+    ],
+    hero: "/protosem/week-6-hero.jpg",
+    gallery: ["/protosem/week-6-hero.jpg"],
+    pdf: "/pdfs/protosem-week-6.pdf",
+    detailedSummary: {
+      title: "Week 6 — Project Planning, UI/UX & Embedded Hardware",
+      sections: [
+        {
+          heading: "First-Level Implementation Planning & UI/UX Architecture",
+          content: [
+            {
+              type: "paragraph",
+              text: "The week began with a first-level implementation discussion, mapping the key components and architecture of the proposed solution. This was followed by a deeper UI/UX session focused on building a mindmap to organize core concepts, a sitemap to define information architecture, and wireframes to outline user flow and interface layout.",
+            },
+          ],
+        },
+        {
+          heading: "Computational Hardware Fundamentals & Embedded Systems",
+          content: [
+            {
+              type: "paragraph",
+              text: "Midweek, the focus shifted to computational hardware fundamentals, covering core electrical concepts — power, voltage, and current — alongside an introduction to microcontrollers, microprocessors, and embedded system architecture, including how sensors and actuators interact with the physical environment.",
+            },
+          ],
+        },
+        {
+          heading: "Hands-on Soldering Practice & 555 Timer Circuit Assembly",
+          content: [
+            {
+              type: "paragraph",
+              text: "The most hands-on day of the week involved soldering practice, culminating in a successfully assembled and functioning circuit (a 555 timer IC with LEDs, resistors, and a capacitor, powering an LED output). Building a functioning circuit by hand reinforced core engineering fundamentals.",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-6-hero.jpg",
+              alt: "Embedded Hardware & Electronics Circuit Practice",
+              caption: "Hands-on hardware prototyping and electronics circuit assembly session during ProtoSem Week 6",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  ...Array.from({ length: 14 }, (_, i) => placeholder(i + 7)),
 ];
 
 export function getWeek(id: number) {
