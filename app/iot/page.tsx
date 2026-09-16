@@ -276,13 +276,11 @@ export default function IoTPage() {
           {/* Media Slots for Task 1 */}
           <div className="mt-10">
             <h3 className="font-display text-xl font-semibold text-ink mb-4">Photos &amp; Video Demonstration</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               <MediaSlot src="/media/iot/task1/board.jpg" alt="ESP32 board" label="ESP32 Board (GPIO 2 LED)" />
               <MediaSlot src="/media/iot/task1/off.jpg" alt="Web UI OFF" label="Web UI — LED OFF" />
               <MediaSlot src="/media/iot/task1/on.jpg" alt="Web UI ON" label="Web UI — LED ON" />
-              <MediaSlot src="/media/iot/task1/responsive.jpg" alt="Mobile responsive" label="Mobile Responsive View" />
-              <MediaSlot src="/media/iot/task1/ide.jpg" alt="Arduino IDE" label="Arduino IDE Code" />
-              <MediaSlot src="/media/iot/task1/setup.jpg" alt="Physical Setup" label="Physical Setup" />
+              <MediaSlot src="/media/iot/task1/setup.jpg" alt="Physical Setup" label="Physical Hardware Setup" />
             </div>
             <div className="mt-4">
               <MediaSlot
@@ -396,13 +394,10 @@ Wall Neutral (direct, no relay)`}</pre>
           {/* Media Slots Task 2 */}
           <div className="mt-10">
             <h3 className="font-display text-xl font-semibold text-ink mb-4">Photos &amp; Video Demonstration</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <MediaSlot src="/media/iot/task2/dashboard.jpg" alt="Adafruit IO Dashboard" label="Adafruit IO Dashboard" />
-              <MediaSlot src="/media/iot/task2/relay.jpg" alt="Relay Close-up" label="Relay Module Close-up" />
-              <MediaSlot src="/media/iot/task2/bulb-on.jpg" alt="Bulb ON" label="Bulb Lit Up" />
-              <MediaSlot src="/media/iot/task2/bulb-off.jpg" alt="Bulb OFF" label="Bulb OFF" />
-              <MediaSlot src="/media/iot/task2/wiring.jpg" alt="Wiring Setup" label="Wiring Connections" />
-              <MediaSlot src="/media/iot/task2/broker.jpg" alt="Broker Config" label="MQTT Broker Config" />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <MediaSlot src="/media/iot/task2/dashboard.jpg" alt="Adafruit IO Dashboard" label="Adafruit IO Cloud Control Panel" />
+              <MediaSlot src="/media/iot/task2/bulb-on.jpg" alt="Bulb ON" label="Relay &amp; 230V Bulb Load" />
+              <MediaSlot src="/media/iot/task2/wiring.jpg" alt="Wiring Setup" label="ESP32 &amp; Relay Wiring" />
             </div>
             <div className="mt-4">
               <MediaSlot
@@ -506,17 +501,16 @@ void loop() {
           {/* Media Slots Task 3 */}
           <div className="mt-10">
             <h3 className="font-display text-xl font-semibold text-ink mb-4">Photos &amp; Video Demonstration</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <MediaSlot src="/media/iot/task3/voice.jpg" alt="Voice control" label="Bulb Responding to Voice Command" />
-              <MediaSlot src="/media/iot/task3/applet.jpg" alt="IFTTT applet" label="IFTTT Applet Configuration" />
-              <MediaSlot src="/media/iot/task3/webhook.jpg" alt="Webhook payload" label="Webhook Payload Setup" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <MediaSlot src="/media/iot/task3/voice.jpg" alt="Voice control" label="Bulb &amp; Relay Physical Circuit" />
+              <MediaSlot src="/media/iot/task3/dashboard.jpg" alt="Cloud Dashboard" label="Cloud MQTT Feed &amp; Status Panel" />
             </div>
             <div className="mt-4">
               <MediaSlot
                 type="video"
                 src="/media/iot/task3/demo.mp4"
                 alt="Task 3 Demo Video"
-                label="Task 3 Demo Video — 'Activate bulb on' voice command demo"
+                label="Task 3 Demo Video — Google Voice Assistant → IFTTT Webhook → Cloud MQTT Actuation"
                 aspectRatio="16/9"
               />
             </div>
@@ -556,18 +550,16 @@ void loop() {
             {/* Media Slots Task 4.1 */}
             <div className="mt-8">
               <h4 className="font-display text-base font-semibold text-ink mb-3">Hardware Photos &amp; Demo</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                <MediaSlot src="/media/iot/task4-hw/breadboard.jpg" alt="Breadboard" label="Breadboard Wiring" />
-                <MediaSlot src="/media/iot/task4-hw/relay-mains.jpg" alt="Relay Mains" label="Relay Mains Module" />
-                <MediaSlot src="/media/iot/task4-hw/sensors.jpg" alt="Sensors" label="DHT11 &amp; LDR Sensors" />
-                <MediaSlot src="/media/iot/task4-hw/full-setup.jpg" alt="Full Setup" label="Full Physical Setup" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <MediaSlot src="/media/iot/task4-hw/breadboard.jpg" alt="Breadboard" label="Breadboard &amp; Relay Assembly" />
+                <MediaSlot src="/media/iot/task4-hw/sensors.jpg" alt="Sensors" label="DHT11 &amp; LDR Sensors on ESP32" />
               </div>
               <div className="mt-3">
                 <MediaSlot
                   type="video"
                   src="/media/iot/task4-hw/demo.mp4"
                   alt="Task 4.1 Demo Video"
-                  label="Hardware Demo — Sensor telemetry &amp; relay action"
+                  label="Hardware Telemetry Demo — Sensor Data &amp; Relay Action"
                   aspectRatio="16/9"
                 />
               </div>
@@ -676,8 +668,8 @@ void loop() {
             <div className="mt-6">
               <h4 className="font-display text-base font-semibold text-ink mb-3">Cloud Console Photos</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <MediaSlot src="/media/iot/task4-cloud/rtdb-console.jpg" alt="Firebase RTDB" label="Firebase RTDB Console Structure" />
-                <MediaSlot src="/media/iot/task4-cloud/security-rules.jpg" alt="Security Rules" label="Firebase Security Rules" />
+                <MediaSlot src="/media/iot/task4-cloud/rtdb-console.jpg" alt="Firebase RTDB" label="Firebase Realtime Database Structure" />
+                <MediaSlot src="/media/iot/task4-cloud/auth-console.jpg" alt="Firebase Auth" label="Firebase Authentication Console" />
               </div>
             </div>
           </div>
@@ -692,18 +684,16 @@ void loop() {
 
             <div className="mt-6">
               <h4 className="font-display text-base font-semibold text-ink mb-3">Web Dashboard Photos &amp; Video Walkthrough</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                <MediaSlot src="/media/iot/task4-dash/dashboard-full.jpg" alt="Full Dashboard" label="Complete Web Dashboard" />
-                <MediaSlot src="/media/iot/task4-dash/mobile.jpg" alt="Mobile Dashboard" label="Responsive Mobile View" />
-                <MediaSlot src="/media/iot/task4-dash/login.jpg" alt="Login Auth" label="Login / Auth Screen" />
-                <MediaSlot src="/media/iot/task4-dash/history-table.jpg" alt="History Table" label="Historical Sensor Data Table" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <MediaSlot src="/media/iot/task4-dash/dashboard-full.jpg" alt="Full Dashboard" label="Complete Real-Time Web Dashboard" />
+                <MediaSlot src="/media/iot/task4-dash/login.jpg" alt="Login Auth" label="Login &amp; User Authentication Interface" />
               </div>
               <div className="mt-3">
                 <MediaSlot
                   type="video"
                   src="/media/iot/task4-dash/demo.mp4"
                   alt="Dashboard Demo Video"
-                  label="Dashboard Walkthrough — Real-time telemetry, toggle, mode switch &amp; CSV export"
+                  label="Dashboard Walkthrough Video — Real-time telemetry, toggle, mode switch &amp; CSV export"
                   aspectRatio="16/9"
                 />
               </div>
@@ -767,15 +757,33 @@ function exportCSV() {
           </p>
 
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {Array.from({ length: 8 }).map((_, idx) => (
+            <MediaSlot src="/media/iot/journey/photo-1.jpg" alt="Build photo 1" label="ESP32 Microcontroller Board" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-2.jpg" alt="Build photo 2" label="Breadboard &amp; Relay Wiring" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-3.jpg" alt="Build photo 3" label="Web UI — State OFF" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-4.jpg" alt="Build photo 4" label="Web UI — State ON" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-5.jpg" alt="Build photo 5" label="Cloud Dashboard Panel" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-6.jpg" alt="Build photo 6" label="Firebase Auth Screen" aspectRatio="square" />
+            <MediaSlot src="/media/iot/journey/photo-7.jpg" alt="Build photo 7" label="Firebase Database Console" aspectRatio="square" />
+          </div>
+
+          <div className="mt-8">
+            <h3 className="font-display text-xl font-semibold text-ink mb-4">Lab Assembly &amp; Testing Videos</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <MediaSlot
-                key={idx}
-                src={`/media/iot/journey/photo-${idx + 1}.jpg`}
-                alt={`Journey photo ${idx + 1}`}
-                label={`Build photo ${idx + 1}`}
-                aspectRatio="square"
+                type="video"
+                src="/media/iot/journey/video-lab-1.mp4"
+                alt="Lab Testing Video 1"
+                label="Lab Testing Video Clip 1 — Initial Hardware Assembly"
+                aspectRatio="16/9"
               />
-            ))}
+              <MediaSlot
+                type="video"
+                src="/media/iot/journey/video-lab-2.mp4"
+                alt="Lab Testing Video 2"
+                label="Lab Testing Video Clip 2 — Sensor &amp; Relay Integration"
+                aspectRatio="16/9"
+              />
+            </div>
           </div>
         </section>
 
