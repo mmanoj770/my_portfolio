@@ -4,7 +4,7 @@ import AmbientShapes from "@/components/AmbientShapes";
 import { Reveal } from "@/components/Reveal";
 import MediaSlot from "@/components/iot/MediaSlot";
 import CodeBlock from "@/components/iot/CodeBlock";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "IoT & Connectivity — Smart Home Automation — Manoj M",
@@ -66,6 +66,33 @@ export default function IoTPage() {
                 Task 4 · Forge Smart Home
               </a>
             </div>
+          </Reveal>
+
+          {/* GOOGLE DRIVE HIGHLIGHT BANNER */}
+          <Reveal delay={0.22} className="mt-6">
+            <a
+              href="https://drive.google.com/drive/folders/1ehc8M4c2labZ-5MKvNeTX5fQEdpvEkve?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-4 rounded-2xl border border-signal/40 bg-signal/10 p-4 transition-all hover:border-signal hover:bg-signal/15 hover:shadow-lg focus-ring max-w-3xl"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-signal text-base-surface font-bold">
+                  <ExternalLink size={18} />
+                </div>
+                <div>
+                  <div className="font-display text-sm font-semibold text-ink group-hover:text-signal transition-colors">
+                    Official IoT Session Google Drive Folder
+                  </div>
+                  <p className="text-xs text-ink-muted mt-0.5">
+                    View &amp; download original full HD demo recordings of all IoT tasks &amp; lab tests
+                  </p>
+                </div>
+              </div>
+              <span className="shrink-0 font-mono text-xs font-semibold uppercase text-signal border border-signal/30 bg-signal/10 px-3 py-1.5 rounded-full hidden sm:inline-block">
+                Open Drive ↗
+              </span>
+            </a>
           </Reveal>
 
           {/* Hero Cover Photo Slot */}
