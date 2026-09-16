@@ -51,39 +51,36 @@ export default function MediaSlot({
   return (
     <div className={`group relative flex flex-col overflow-hidden rounded-xl border border-base-border bg-base-surface ${className}`}>
       <div className={`relative w-full overflow-hidden bg-base-raised ${aspectClass}`}>
-        {!hasLoaded && (
-          <div className="absolute inset-0 animate-pulse bg-base-surface/80 flex items-center justify-center">
-            {type === "video" ? (
-              <VideoIcon size={20} className="text-ink-faint opacity-40" />
-            ) : (
-              <ImageIcon size={20} className="text-ink-faint opacity-40" />
-            )}
-          </div>
-        )}
-
         {type === "video" ? (
           <video
             controls
             preload="metadata"
             className="h-full w-full object-cover"
-            onLoadedData={() => setHasLoaded(true)}
             onError={() => setHasError(true)}
           >
             <source src={src} type="video/mp4" />
+            Your browser does not support the video tag.
           </video>
         ) : (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={src}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            className={`h-full w-full object-cover transition-opacity duration-300 ${
-              hasLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            onLoad={() => setHasLoaded(true)}
-            onError={() => setHasError(true)}
-          />
+          <>
+            {!hasLoaded && (
+              <div className="absolute inset-0 pointer-events-none animate-pulse bg-base-surface/80 flex items-center justify-center">
+                <ImageIcon size={20} className="text-ink-faint opacity-40" />
+              </div>
+            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              loading="lazy"
+              decoding="async"
+              className={`h-full w-full object-cover transition-opacity duration-300 ${
+                hasLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setHasLoaded(true)}
+              onError={() => setHasError(true)}
+            />
+          </>
         )}
       </div>
 
@@ -95,4 +92,5 @@ export default function MediaSlot({
     </div>
   );
 }
+
 
