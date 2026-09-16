@@ -625,7 +625,12 @@ export const protosemWeeks: ProtosemWeek[] = [
       "Building a functioning circuit by hand made abstract electronics concepts tangible and reinforced core engineering fundamentals.",
     ],
     hero: "/protosem/week-6-hero.jpg",
-    gallery: ["/protosem/week-6-hero.jpg"],
+    gallery: [
+      "/protosem/week-6-hero.jpg",
+      "/protosem/week-6-soldering.jpg",
+      "/protosem/week-6-circuit.jpg",
+      "/protosem/week-6-assembly.jpg",
+    ],
     pdf: "/pdfs/protosem-week-6.pdf",
     detailedSummary: {
       title: "Week 6 — Project Planning, UI/UX & Embedded Hardware",
@@ -657,9 +662,21 @@ export const protosemWeeks: ProtosemWeek[] = [
             },
             {
               type: "image",
-              src: "/protosem/week-6-hero.jpg",
-              alt: "Embedded Hardware & Electronics Circuit Practice",
-              caption: "Hands-on hardware prototyping and electronics circuit assembly session during ProtoSem Week 6",
+              src: "/protosem/week-6-soldering.jpg",
+              alt: "Hands-on Soldering Practice Session",
+              caption: "Hands-on PCB soldering practice: Assembling discrete electrical components using soldering iron and wire",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-6-circuit.jpg",
+              alt: "Completed 555 Timer LED PCB Circuit",
+              caption: "Completed & functioning 555 timer IC circuit on dot PCB board with dual LEDs, electrolytic capacitor, resistors, and power leads",
+            },
+            {
+              type: "image",
+              src: "/protosem/week-6-assembly.jpg",
+              alt: "Hardware Lab Assembly & Prototyping",
+              caption: "Hardware prototyping and enclosure assembly work on the lab bench",
             },
           ],
         },
