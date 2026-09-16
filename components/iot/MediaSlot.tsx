@@ -35,59 +35,64 @@ export default function MediaSlot({
   if (hasError) {
     return (
       <div
-        className={`relative flex flex-col items-center justify-center gap-2.5 rounded-xl border border-base-border bg-base-surface/80 p-5 text-center ${aspectClass} ${className}`}
+        className={`relative flex flex-col items-center justify-center gap-2 rounded-xl border border-base-border bg-base-surface/80 p-5 text-center ${aspectClass} ${className}`}
       >
         {type === "video" ? (
-          <VideoIcon size={24} className="text-ink-faint opacity-60" />
+          <VideoIcon size={22} className="text-ink-faint opacity-60" />
         ) : (
-          <ImageIcon size={24} className="text-ink-faint opacity-60" />
+          <ImageIcon size={22} className="text-ink-faint opacity-60" />
         )}
         <p className="text-xs font-medium text-ink-muted">{label}</p>
-        <code className="font-mono text-[10px] text-ink-faint break-all bg-base-raised/80 px-2 py-0.5 rounded border border-base-border/40">
-          {src}
-        </code>
+        <span className="text-[10px] text-ink-faint font-mono">{src}</span>
       </div>
     );
   }
 
   return (
-    <div
-      className={`relative overflow-hidden rounded-xl border border-base-border bg-base-surface ${aspectClass} ${className}`}
-    >
-      {type === "video" ? (
-        <video
-          controls
-          className="h-full w-full object-cover"
-          onLoadedData={() => setHasLoaded(true)}
-          onError={() => setHasError(true)}
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      ) : (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={src}
-          alt={alt}
-          className={`h-full w-full object-cover transition-opacity duration-300 ${
-            hasLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          onLoad={() => setHasLoaded(true)}
-          onError={() => setHasError(true)}
-        />
-      )}
-      {!hasLoaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 bg-base-surface p-5 text-center">
-          {type === "video" ? (
-            <VideoIcon size={24} className="text-ink-faint opacity-60" />
-          ) : (
-            <ImageIcon size={24} className="text-ink-faint opacity-60" />
-          )}
-          <p className="text-xs font-medium text-ink-muted">{label}</p>
-          <code className="font-mono text-[10px] text-ink-faint break-all bg-base-raised/80 px-2 py-0.5 rounded border border-base-border/40">
-            {src}
-          </code>
+    <div className={`group relative flex flex-col overflow-hidden rounded-xl border border-base-border bg-base-surface ${className}`}>
+      <div className={`relative w-full overflow-hidden bg-base-raised ${aspectClass}`}>
+        {!hasLoaded && (
+          <div className="absolute inset-0 animate-pulse bg-base-surface/80 flex items-center justify-center">
+            {type === "video" ? (
+              <VideoIcon size={20} className="text-ink-faint opacity-40" />
+            ) : (
+              <ImageIcon size={20} className="text-ink-faint opacity-40" />
+            )}
+          </div>
+        )}
+
+        {type === "video" ? (
+          <video
+            controls
+            preload="metadata"
+            className="h-full w-full object-cover"
+            onLoadedData={() => setHasLoaded(true)}
+            onError={() => setHasError(true)}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className={`h-full w-full object-cover transition-opacity duration-300 ${
+              hasLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            onLoad={() => setHasLoaded(true)}
+            onError={() => setHasError(true)}
+          />
+        )}
+      </div>
+
+      {label && (
+        <div className="border-t border-base-border/50 bg-base-surface px-3 py-2 text-center">
+          <p className="text-xs font-medium text-ink-muted line-clamp-1">{label}</p>
         </div>
       )}
     </div>
   );
 }
+
