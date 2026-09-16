@@ -683,7 +683,125 @@ export const protosemWeeks: ProtosemWeek[] = [
       ],
     },
   },
-  ...Array.from({ length: 14 }, (_, i) => placeholder(i + 7)),
+  {
+    id: 7,
+    title: "Week 7 — IoT & Connectivity — Smart Home Automation",
+    status: "complete",
+    summary:
+      "Week 7 was an intensive hands-on IoT & Connectivity sprint spanning local embedded HTTP servers, remote cloud MQTT pub/sub pipelines, Google Assistant voice automation, and a full-stack sensor-driven smart home platform called Forge built on Firebase.",
+    reflection:
+      "Moving from local request-response HTTP to cloud pub/sub MQTT demonstrated how different protocol architectures solve latency vs global accessibility tradeoffs. Unifying hardware sensors with real-time Firebase sync and web dashboards showed how edge computing connects to modern user interfaces.",
+    learnings: [
+      "Configured ESP32 Wi-Fi station mode and lightweight embedded WebServer routing for local HTTP REST LED control.",
+      "Implemented MQTT publish-subscribe protocol using Adafruit IO to control 230V AC mains loads via a 5V relay.",
+      "Bridged Google Assistant NLU voice intents through IFTTT webhooks to cloud MQTT feeds for hands-free actuation.",
+      "Built 'Forge' — a full-stack smart home platform streaming DHT11 temperature/humidity & analog LDR telemetry to Firebase Realtime Database with an interactive web dashboard.",
+      "Implemented automatic threshold-driven lighting control alongside manual override toggles and historical CSV data exports.",
+    ],
+    hero: "/protosem/week-7-hero.jpg",
+    gallery: [
+      "/protosem/week-7-hero.jpg",
+      "/media/iot/task1/board.jpg",
+      "/media/iot/task1/setup.jpg",
+      "/media/iot/task2/dashboard.jpg",
+      "/media/iot/task2/wiring.jpg",
+      "/media/iot/task3/voice.jpg",
+      "/media/iot/task4-hw/breadboard.jpg",
+      "/media/iot/task4-cloud/rtdb-console.jpg",
+      "/media/iot/task4-dash/dashboard-full.jpg",
+    ],
+    pdf: "/pdfs/iot-session-1.pdf",
+    detailedSummary: {
+      title: "Week 7 — IoT & Connectivity — Smart Home Automation",
+      sections: [
+        {
+          heading: "Task 1 — HTTP LED Web Control (Local Wi-Fi REST)",
+          content: [
+            {
+              type: "paragraph",
+              text: "This task connects an ESP32 to a local Wi-Fi network and runs a lightweight built-in web server listening on port 80. Sending HTTP GET requests from any browser on the same network toggles the ESP32's onboard LED on and off in real time with ultra-low response times (<150ms).",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task1/board.jpg",
+              alt: "ESP32 Board GPIO 2 LED",
+              caption: "ESP32 DevKit V4 Board controlling onboard GPIO 2 blue LED over local HTTP REST endpoints",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task1/setup.jpg",
+              alt: "Physical Hardware Setup",
+              caption: "Physical hardware testing setup connected via USB data cable to Arduino IDE",
+            },
+          ],
+        },
+        {
+          heading: "Task 2 — MQTT Cloud Dashboard with 230V Relay Control",
+          content: [
+            {
+              type: "paragraph",
+              text: "Moving from local HTTP to a cloud publish-subscribe model: an MQTT client on the ESP32 subscribes to an Adafruit IO topic. Any command published to that feed from anywhere on the internet is received instantly, switching a 5V relay module wired to a 230V AC mains incandescent bulb.",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task2/dashboard.jpg",
+              alt: "Adafruit IO Cloud Dashboard",
+              caption: "Adafruit IO Cloud Dashboard providing global web-based toggle switches and real-time feed monitors",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task2/wiring.jpg",
+              alt: "ESP32 & Relay Wiring",
+              caption: "ESP32 microcontroller wired to 5V relay module for safe 230V high-voltage load switching",
+            },
+          ],
+        },
+        {
+          heading: "Task 3 — Google Assistant Voice Control via IFTTT & Webhooks",
+          content: [
+            {
+              type: "paragraph",
+              text: "A hands-free voice-control layer built on top of Task 2. IFTTT ('If This Then That') bridges Google Assistant voice intent recognition to a Webhook POST request, delivering payloads to Adafruit IO, which republishes MQTT messages to actuate the relay.",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task3/voice.jpg",
+              alt: "Voice Control & Physical Circuit",
+              caption: "Bulb and relay responding to Google Assistant 'Activate bulb on' voice commands",
+            },
+          ],
+        },
+        {
+          heading: "Task 4 — Forge Full-Stack Smart Home Platform",
+          content: [
+            {
+              type: "paragraph",
+              text: "Forge combines everything from Tasks 1–3 into one production-style system with three unified layers: a hardware layer sensing temperature, humidity (DHT11), and ambient light (analog LDR) while driving an active-LOW relay; a cloud layer (Firebase RTDB) syncing state in real time over WebSockets; and a web dashboard giving full manual and automatic control.",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task4-hw/breadboard.jpg",
+              alt: "Hardware Sensors & Relay Wiring",
+              caption: "Hardware Layer: ESP32 with DHT11 temperature/humidity sensor, analog LDR light sensor, and relay module",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task4-cloud/rtdb-console.jpg",
+              alt: "Firebase Realtime Database Console",
+              caption: "Cloud Layer: Firebase Realtime Database console syncing telemetry streams and appliance states live",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task4-dash/dashboard-full.jpg",
+              alt: "Complete Forge Web Dashboard",
+              caption: "Web Dashboard Layer: Real-time gauge cards, manual appliance toggle, LDR threshold mode switch, and CSV data export",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  ...Array.from({ length: 13 }, (_, i) => placeholder(i + 8)),
 ];
 
 export function getWeek(id: number) {
