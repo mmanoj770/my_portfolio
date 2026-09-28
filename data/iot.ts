@@ -95,14 +95,15 @@ export const iotSessions: IoTSession[] = [
     status: "complete",
     tags: ["Firebase RTDB", "DHT11", "LDR", "React / Web Dashboard", "Full Stack"],
     summary:
-      "Full-stack smart home solution streaming environmental telemetry (temperature, humidity, light) to Firebase with real-time web control.",
+      "Full-stack smart home solution streaming environmental telemetry (temperature, humidity, light) to Firebase with real-time web control, BaaS auth rules, and dual Manual/Automatic operating modes.",
     reflection:
-      "Forge unifies edge sensing, cloud database synchronization, and modern front-end web control into a robust real-time automation ecosystem.",
+      "Forge unifies edge sensing, cloud database synchronization, and modern front-end web control into a robust real-time automation ecosystem where hardware and UI act as equal clients of a shared cloud source of truth.",
     learnings: [
-      "Interfaced digital DHT11 and analog LDR sensors on ESP32 with 15-sample noise smoothing.",
-      "Established bi-directional WebSocket streaming with Firebase Realtime Database.",
-      "Built a modern responsive web dashboard with live gauge cards, manual toggle, mode switch, and CSV data export.",
-      "Implemented automatic threshold-driven lighting logic alongside manual override controls.",
+      "Interfaced digital DHT11 and analog LDR sensors on ESP32 with 15-sample noise smoothing and GPIO34 ADC1 input connection.",
+      "Established bi-directional WebSocket streaming with Firebase Realtime Database (BaaS) secured by auth != null security rules.",
+      "Built a modern responsive web dashboard with live gauge cards, manual toggle, mode switch indicator badge, and CSV data export.",
+      "Implemented mutually exclusive Manual and Automatic mode logic enforced on both firmware stream handler and web interface.",
+      "Analyzed cloud service models (IaaS, PaaS, SaaS, BaaS) and system communication flow across ESP32, Firebase RTDB, and browser clients.",
     ],
     hero: "/media/iot/task4-dash/dashboard-full.jpg",
     gallery: [
