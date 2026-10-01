@@ -90,7 +90,27 @@ export const iotSessions: IoTSession[] = [
   },
   {
     id: 4,
-    title: "Task 4 — Forge Full-Stack Smart Home Platform",
+    title: "Task 4 — Dashboard Connection",
+    date: "Day 4",
+    status: "complete",
+    tags: ["Firebase", "Web Dashboard", "UI"],
+    summary:
+      "Connecting the web dashboard to the cloud backend to view real-time sensor data and control appliances.",
+    reflection:
+      "A cloud-based dashboard decouples the UI from the physical hardware, allowing for global access and real-time updates.",
+    learnings: [
+      "Designed the layout for real-time sensor data visualization.",
+      "Connected UI components to Firebase RTDB streams.",
+    ],
+    hero: "/media/iot/task4-dash/dashboard-full.jpg",
+    gallery: [
+      "/media/iot/task4-dash/dashboard-full.jpg",
+    ],
+    pdf: "/pdfs/iot-session-4.pdf",
+  },
+  {
+    id: 5,
+    title: "Task 5 — Forge Full-Stack Smart Home Platform",
     date: "Intermediate",
     status: "complete",
     tags: ["Firebase RTDB", "DHT11", "LDR", "React / Web Dashboard", "Full Stack"],
@@ -111,7 +131,7 @@ export const iotSessions: IoTSession[] = [
       "/media/iot/task4-dash/dashboard-full.jpg",
       "/media/iot/task4-cloud/rtdb-console.jpg",
     ],
-    pdf: "/pdfs/iot-session-4.pdf",
+    pdf: "/pdfs/iot-session-5.pdf",
   },
 ];
 

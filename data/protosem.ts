@@ -772,7 +772,22 @@ export const protosemWeeks: ProtosemWeek[] = [
           ],
         },
         {
-          heading: "Task 4 — Forge Full-Stack Smart Home Platform",
+          heading: "Task 4 — Dashboard Connection",
+          content: [
+            {
+              type: "paragraph",
+              text: "Connecting the web dashboard to the cloud backend to view real-time sensor data and control appliances. A cloud-based dashboard decouples the UI from the physical hardware, allowing for global access and real-time updates.",
+            },
+            {
+              type: "image",
+              src: "/media/iot/task4-dash/dashboard-full.jpg",
+              alt: "Dashboard Connection Interface",
+              caption: "Web Dashboard Interface connected to Firebase Realtime Database for live telemetry.",
+            },
+          ],
+        },
+        {
+          heading: "Task 5 — Forge Full-Stack Smart Home Platform",
           content: [
             {
               type: "paragraph",

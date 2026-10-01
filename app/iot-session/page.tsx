@@ -72,7 +72,13 @@ export default function IoTSessionPage() {
                 href="#task4"
                 className="rounded-full border border-base-border bg-base-surface px-4 py-2 text-xs font-medium text-ink-muted transition-colors hover:border-signal hover:text-ink focus-ring"
               >
-                Task 4 · Forge Smart Home
+                Task 4 · Dashboard Connection
+              </a>
+              <a
+                href="#task5"
+                className="rounded-full border border-base-border bg-base-surface px-4 py-2 text-xs font-medium text-ink-muted transition-colors hover:border-signal hover:text-ink focus-ring"
+              >
+                Task 5 · Forge Smart Home
               </a>
             </div>
           </Reveal>
@@ -133,7 +139,7 @@ export default function IoTSessionPage() {
               <div className="mt-1 text-xs text-ink-faint">Cloud Integrations</div>
             </div>
             <div className="bg-base-surface p-6">
-              <div className="font-display text-3xl font-bold text-ink">4 / 4</div>
+              <div className="font-display text-3xl font-bold text-ink">5 / 5</div>
               <div className="mt-1 text-xs text-ink-faint">Tasks Complete</div>
             </div>
           </div>
@@ -184,6 +190,19 @@ export default function IoTSessionPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between py-5 gap-2">
               <div className="flex items-baseline gap-4">
                 <span className="font-mono text-xs text-ink-faint">04</span>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-ink">Dashboard Connection</h3>
+                  <p className="text-xs text-ink-faint mt-0.5">Firebase · Web Dashboard</p>
+                </div>
+              </div>
+              <span className="font-mono text-xs text-signal bg-signal/10 px-3 py-1 rounded-full border border-signal/30 w-fit">
+                Day 4
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between py-5 gap-2">
+              <div className="flex items-baseline gap-4">
+                <span className="font-mono text-xs text-ink-faint">05</span>
                 <div>
                   <h3 className="font-display text-lg font-semibold text-ink">Forge Smart Home</h3>
                   <p className="text-xs text-ink-faint mt-0.5">ESP32 · Firebase · Web Dashboard</p>
@@ -559,6 +578,32 @@ void loop() {
             Task 04
           </div>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-ink">
+            Dashboard Connection
+          </h2>
+          <p className="mt-2 text-xs font-mono text-ink-faint">
+            Firebase · Web Dashboard
+          </p>
+          <p className="mt-6 leading-relaxed text-ink-muted">
+            Connecting the web dashboard to the cloud backend to view real-time sensor data and control appliances.
+            A cloud-based dashboard decouples the UI from the physical hardware, allowing for global access and real-time updates.
+          </p>
+          <div className="mt-10">
+            <MediaSlot
+              type="image"
+              src="/media/iot/task4-dash/dashboard-full.jpg"
+              alt="Dashboard Connection"
+              label="Dashboard Connection Interface"
+              className="w-full shadow-2xl"
+            />
+          </div>
+        </section>
+
+        {/* ==================== TASK 5 ==================== */}
+        <section id="task5" className="scroll-mt-28 border-t border-base-border pt-16 mb-24">
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-signal font-semibold mb-3">
+            Task 05
+          </div>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-ink">
             Forge — Full-Stack Smart Home Platform
           </h2>
           <p className="mt-2 text-xs font-mono text-ink-faint">
@@ -574,7 +619,7 @@ void loop() {
           {/* EVALUATION FIX PACKAGE BADGE */}
           <div className="mt-6 rounded-xl border border-signal/40 bg-signal/10 p-4">
             <div className="flex items-center gap-2 font-display text-sm font-semibold text-signal">
-              <CheckCircle2 size={16} /> Task 4 Evaluation Fix Package Applied — All 27 Criteria &amp; Mode Logic Resolved
+              <CheckCircle2 size={16} /> Task 5 Evaluation Fix Package Applied — All 27 Criteria &amp; Mode Logic Resolved
             </div>
             <p className="mt-1 text-xs text-ink-muted leading-relaxed">
               Includes full ready-to-paste explanatory content for all 12 flagged criteria (Part A) and Issue 3 firmware/dashboard logic for Manual &amp; Automatic operating modes (Part B).
@@ -752,9 +797,9 @@ DHT11 + LDR                                              Dashboard (dashboard.js
             </p>
           </div>
 
-          {/* 4.1 HARDWARE */}
+          {/* 5.1 HARDWARE */}
           <div className="mt-12 rounded-2xl border border-base-border bg-base-surface/40 p-8">
-            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 04.1 — Hardware</div>
+            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 05.1 — Hardware</div>
             <h3 className="font-display text-2xl font-bold text-ink mt-2">
               ESP32 Environmental Monitoring &amp; Relay Control
             </h3>
@@ -1006,9 +1051,9 @@ void loop() {
             />
           </div>
 
-          {/* 4.2 CLOUD */}
+          {/* 5.2 CLOUD */}
           <div className="mt-8 rounded-2xl border border-base-border bg-base-surface/40 p-8">
-            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 04.2 — Cloud</div>
+            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 05.2 — Cloud</div>
             <h3 className="font-display text-2xl font-bold text-ink mt-2">
               Firebase Cloud Backend &amp; Real-Time Sync
             </h3>
@@ -1110,9 +1155,9 @@ void loop() {
             </div>
           </div>
 
-          {/* 4.3 DASHBOARD */}
+          {/* 5.3 DASHBOARD */}
           <div className="mt-8 rounded-2xl border border-base-border bg-base-surface/40 p-8">
-            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 04.3 — Dashboard</div>
+            <div className="font-mono text-xs text-signal uppercase tracking-wider font-semibold">Task 05.3 — Dashboard</div>
             <h3 className="font-display text-2xl font-bold text-ink mt-2">
               Web Dashboard &amp; User Interface
             </h3>
