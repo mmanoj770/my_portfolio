@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Image as ImageIcon, Video as VideoIcon } from "lucide-react";
 
 interface MediaSlotProps {
@@ -9,6 +9,7 @@ interface MediaSlotProps {
   alt: string;
   label: string;
   aspectRatio?: "4/3" | "16/9" | "square" | "auto";
+  fit?: "cover" | "contain";
   className?: string;
 }
 
@@ -18,10 +19,22 @@ export default function MediaSlot({
   alt,
   label,
   aspectRatio = "4/3",
+  fit = "cover",
   className = "",
 }: MediaSlotProps) {
+  const fitClass = fit === "contain" ? "object-contain" : "object-cover";
   const [hasError, setHasError] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // The static HTML starts loading the image before React hydrates; if it finishes
+  // first, onLoad / onError never reach React, so check the element's state on mount.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img || !img.complete) return;
+    if (img.naturalWidth > 0) setHasLoaded(true);
+    else setHasError(true);
+  }, []);
 
   const aspectClass =
     aspectRatio === "16/9"
@@ -55,7 +68,7 @@ export default function MediaSlot({
           <video
             controls
             preload="metadata"
-            className="h-full w-full object-cover"
+            className={`h-full w-full ${fitClass}`}
             onError={() => setHasError(true)}
           >
             <source src={src} type="video/mp4" />
@@ -70,11 +83,12 @@ export default function MediaSlot({
             )}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              ref={imgRef}
               src={src}
               alt={alt}
               loading="lazy"
               decoding="async"
-              className={`h-full w-full object-cover transition-opacity duration-300 ${
+              className={`h-full w-full ${fitClass} transition-opacity duration-300 ${
                 hasLoaded ? "opacity-100" : "opacity-0"
               }`}
               onLoad={() => setHasLoaded(true)}
@@ -86,7 +100,7 @@ export default function MediaSlot({
 
       {label && (
         <div className="border-t border-base-border/50 bg-base-surface px-3 py-2 text-center">
-          <p className="text-xs font-medium text-ink-muted line-clamp-1">{label}</p>
+          <p className="text-xs font-medium text-ink-muted line-clamp-2">{label}</p>
         </div>
       )}
     </div>

@@ -1,0 +1,24 @@
+{
+  "_comment": "Shape of the Realtime Database used by the dashboard and the ESP32. Values are examples; the reading under sensorData matches the dashboard screenshot (23 °C, 60 %, LDR 1325, automatic mode, bulb off).",
+  "smarthome": {
+    "devices": {
+      "esp32_001": {
+        "status": "off",
+        "mode": "automatic",
+        "ldrThreshold": 400,
+        "lastUpdate": 1789118998133
+      }
+    },
+    "sensorData": {
+      "esp32_001": {
+        "1789119000000": {
+          "temperature": 23,
+          "humidity": 60,
+          "ldr": 1325,
+          "bulbState": "off",
+          "mode": "automatic"
+        }
+      }
+    }
+  }
+}

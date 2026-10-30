@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SmartHome Dashboard</title>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #userEmail {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #ef4444;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* CONNECTION */
+
+        .connection {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        #connectionStatus {
+            font-weight: bold;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            color: #6b7280;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        /* CONTROL SECTION */
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bulb-status {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .on-btn {
+            background: #22c55e;
+            color: white;
+        }
+
+        .off-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .manual-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .auto-btn {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        button.active {
+            outline: 3px solid #111827;
+        }
+
+        .threshold {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        /* CHART */
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        /* CSV */
+
+        .csv-btn {
+            background: #111827;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .control-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .value {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>SmartHome IoT Dashboard</h1>
+
+        <div class="header-right">
+
+            <span id="userEmail">
+                Loading...
+            </span>
+
+            <button class="logout-btn" onclick="logout()">
+                Sign Out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <!-- FIREBASE CONNECTION -->
+
+        <div class="connection">
+
+            Firebase Connection:
+
+            <span id="connectionStatus">
+                Checking...
+            </span>
+
+        </div>
+
+
+        <!-- CURRENT SENSOR VALUES -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Temperature</h3>
+
+                <div class="value">
+                    <span id="temperature">
+                        --
+                    </span>
+                    °C
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Humidity</h3>
+
+                <div class="value">
+                    <span id="humidity">
+                        --
+                    </span>
+                    %
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Ambient Light</h3>
+
+                <div class="value">
+                    <span id="ldr">
+                        --
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Operating Mode</h3>
+
+                <div class="value" id="mode">
+                    --
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPLIANCE CONTROL -->
+
+        <div class="section">
+
+            <h2>Appliance Control</h2>
+
+            <div class="control-row">
+
+                <div>
+
+                    <div>
+                        Main Bulb
+                    </div>
+
+                    <div class="bulb-status">
+
+                        Status:
+
+                        <span id="bulbStatus">
+                            --
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button class="on-btn" onclick="setBulb('on')">
+
+                        Turn ON
+
+                    </button>
+
+
+                    <button class="off-btn" onclick="setBulb('off')">
+
+                        Turn OFF
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MODE -->
+
+            <div class="control-row">
+
+                <div>
+
+                    <strong>
+                        Operating Mode
+                    </strong>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button id="manualBtn" class="manual-btn" onclick="setMode('manual')">
+
+                        Manual
+
+                    </button>
+
+
+                    <button id="automaticBtn" class="auto-btn" onclick="setMode('automatic')">
+
+                        Automatic
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- THRESHOLD -->
+
+            <div class="threshold">
+
+                Automatic LDR Threshold:
+
+                <strong id="ldrThreshold">
+                    400
+                </strong>
+
+                <br><br>
+
+                In Automatic mode, the ESP32 can use this threshold
+                to decide whether the bulb should turn ON or OFF.
+
+            </div>
+
+        </div>
+
+
+        <!-- GRAPH -->
+
+        <div class="section">
+
+            <h2>
+                Historical Sensor Data
+            </h2>
+
+            <div class="chart-container">
+
+                <canvas id="sensorChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- DATA TABLE -->
+
+        <div class="section">
+
+            <h2>
+                Sensor History
+            </h2>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Timestamp
+                            </th>
+
+                            <th>
+                                Temperature (°C)
+                            </th>
+
+                            <th>
+                                Humidity (%)
+                            </th>
+
+                            <th>
+                                LDR
+                            </th>
+
+                            <th>
+                                Bulb
+                            </th>
+
+                            <th>
+                                Mode
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="historyTable">
+
+                        <tr>
+
+                            <td colspan="6" class="empty">
+
+                                No sensor data available.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <button class="csv-btn" onclick="downloadCSV()">
+
+                Download CSV
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* =====================================================
+           FIREBASE CONFIG
+        ===================================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "YOUR_FIREBASE_WEB_API_KEY",
+
+            authDomain:
+                "YOUR_PROJECT_ID.firebaseapp.com",
+
+            databaseURL:
+                "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+
+            projectId:
+                "YOUR_PROJECT_ID",
+
+            storageBucket:
+                "YOUR_PROJECT_ID.firebasestorage.app",
+
+            messagingSenderId:
+                "YOUR_SENDER_ID",
+
+            appId:
+                "YOUR_APP_ID",
+
+            measurementId:
+                "YOUR_MEASUREMENT_ID"
+
+        };
+
+
+        /* =====================================================
+           INITIALIZE FIREBASE
+        ===================================================== */
+
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+
+        const db = firebase.database();
+
+
+        let currentUser = null;
+
+        let sensorChart = null;
+
+        let historyData = [];
+
+
+        /* =====================================================
+           AUTHENTICATION GUARD
+           
+           IMPORTANT:
+           This is ONLY for dashboard.html.
+           
+           If user is NOT logged in:
+           dashboard → index.html
+        ===================================================== */
+
+        auth.onAuthStateChanged(function (user) {
+
+            if (!user) {
+
+                window.location.href =
+                    "index.html";
+
+                return;
+
+            }
+
+
+            currentUser = user;
+
+
+            document.getElementById("userEmail")
+                .textContent = user.email;
+
+
+            startDashboard();
+
+        });
+
+
+        /* =====================================================
+           START DASHBOARD
+        ===================================================== */
+
+        function startDashboard() {
+
+            listenConnection();
+
+            listenDevice();
+
+            listenSensorHistory();
+
+        }
+
+
+        /* =====================================================
+           FIREBASE CONNECTION STATUS
+        ===================================================== */
+
+        function listenConnection() {
+
+            const connectionRef =
+                db.ref(".info/connected");
+
+
+            connectionRef.on(
+                "value",
+                function (snapshot) {
+
+                    const status =
+                        document.getElementById(
+                            "connectionStatus"
+                        );
+
+
+                    if (snapshot.val() === true) {
+
+                        status.textContent =
+                            "Connected";
+
+                        status.style.color =
+                            "green";
+
+                    }
+
+                    else {
+
+                        status.textContent =
+                            "Disconnected";
+
+                        status.style.color =
+                            "red";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           DEVICE DATA
+           
+           Expected:
+           
+           smarthome
+             devices
+               esp32_001
+                 status
+                 mode
+                 ldrThreshold
+                 lastUpdate
+        ===================================================== */
+
+        function listenDevice() {
+
+            const deviceRef =
+                db.ref(
+                    "smarthome/devices/esp32_001"
+                );
+
+
+            deviceRef.on(
+                "value",
+                function (snapshot) {
+
+                    const data =
+                        snapshot.val();
+
+
+                    if (!data) {
+
+                        return;
+
+                    }
+
+
+                    /* BULB */
+
+                    const bulbState =
+                        data.status || "off";
+
+
+                    document.getElementById(
+                        "bulbStatus"
+                    ).textContent =
+                        bulbState.toUpperCase();
+
+
+                    /* MODE */
+
+                    const mode =
+                        data.mode || "manual";
+
+
+                    document.getElementById(
+                        "mode"
+                    ).textContent =
+                        mode.toUpperCase();
+
+
+                    /* THRESHOLD */
+
+                    const threshold =
+                        data.ldrThreshold;
+
+
+                    if (threshold !== undefined) {
+
+                        document.getElementById(
+                            "ldrThreshold"
+                        ).textContent =
+                            threshold;
+
+                    }
+
+
+                    /* ACTIVE MODE BUTTON */
+
+                    document.getElementById(
+                        "manualBtn"
+                    ).classList.remove("active");
+
+
+                    document.getElementById(
+                        "automaticBtn"
+                    ).classList.remove("active");
+
+
+                    if (mode === "manual") {
+
+                        document.getElementById(
+                            "manualBtn"
+                        ).classList.add("active");
+
+                    }
+
+                    else if (mode === "automatic") {
+
+                        document.getElementById(
+                            "automaticBtn"
+                        ).classList.add("active");
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           TEMPERATURE / HUMIDITY / LDR HISTORY
+           
+           Expected:
+           
+           smarthome
+             sensorData
+               esp32_001
+                 timestamp
+                   temperature
+                   humidity
+                   ldr
+                   bulbState
+                   mode
+        ===================================================== */
+
+        function listenSensorHistory() {
+
+            const historyRef =
+                db.ref(
+                    "smarthome/sensorData/esp32_001"
+                )
+                    .limitToLast(20);
+
+
+            historyRef.on(
+                "value",
+                function (snapshot) {
+
+                    const data =
+                        snapshot.val();
+
+
+                    historyData = [];
+
+
+                    if (!data) {
+
+                        updateCurrentValues(
+                            null
+                        );
+
+                        renderTable();
+
+                        renderChart();
+
+                        return;
+
+                    }
+
+
+                    Object.keys(data).forEach(
+                        function (key) {
+
+                            const item =
+                                data[key];
+
+
+                            historyData.push({
+
+                                timestamp:
+                                    key,
+
+                                temperature:
+                                    Number(
+                                        item.temperature || 0
+                                    ),
+
+                                humidity:
+                                    Number(
+                                        item.humidity || 0
+                                    ),
+
+                                ldr:
+                                    Number(
+                                        item.ldr || 0
+                                    ),
+
+                                bulbState:
+                                    item.bulbState ||
+                                    item.status ||
+                                    "off",
+
+                                mode:
+                                    item.mode ||
+                                    "manual"
+
+                            });
+
+                        }
+                    );
+
+
+                    historyData.sort(
+                        function (a, b) {
+
+                            return String(
+                                a.timestamp
+                            ).localeCompare(
+                                String(b.timestamp)
+                            );
+
+                        }
+                    );
+
+
+                    /* CURRENT VALUES */
+
+                    if (historyData.length > 0) {
+
+                        const latest =
+                            historyData[
+                            historyData.length - 1
+                            ];
+
+
+                        updateCurrentValues(
+                            latest
+                        );
+
+                    }
+
+
+                    renderTable();
+
+                    renderChart();
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           CURRENT VALUES
+        ===================================================== */
+
+        function updateCurrentValues(data) {
+
+            if (!data) {
+
+                document.getElementById(
+                    "temperature"
+                ).textContent = "--";
+
+
+                document.getElementById(
+                    "humidity"
+                ).textContent = "--";
+
+
+                document.getElementById(
+                    "ldr"
+                ).textContent = "--";
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "temperature"
+            ).textContent =
+                data.temperature;
+
+
+            document.getElementById(
+                "humidity"
+            ).textContent =
+                data.humidity;
+
+
+            document.getElementById(
+                "ldr"
+            ).textContent =
+                data.ldr;
+
+        }
+
+
+        /* =====================================================
+           BULB CONTROL
+        ===================================================== */
+
+        function setBulb(state) {
+
+            if (!currentUser) {
+
+                return;
+
+            }
+
+
+            const deviceRef =
+                db.ref(
+                    "smarthome/devices/esp32_001"
+                );
+
+
+            deviceRef.update({
+
+                status: state,
+
+                lastUpdate:
+                    firebase.database.ServerValue
+                        .TIMESTAMP
+
+            })
+                .then(function () {
+
+                    console.log(
+                        "Bulb changed to:",
+                        state
+                    );
+
+                })
+                .catch(function (error) {
+
+                    alert(
+                        "Unable to control bulb: " +
+                        error.message
+                    );
+
+                });
+
+        }
+
+
+        /* =====================================================
+           MODE CONTROL
+        ===================================================== */
+
+        function setMode(mode) {
+
+            if (!currentUser) {
+
+                return;
+
+            }
+
+
+            const deviceRef =
+                db.ref(
+                    "smarthome/devices/esp32_001"
+                );
+
+
+            deviceRef.update({
+
+                mode: mode,
+
+                lastUpdate:
+                    firebase.database.ServerValue
+                        .TIMESTAMP
+
+            })
+                .then(function () {
+
+                    console.log(
+                        "Mode changed to:",
+                        mode
+                    );
+
+                })
+                .catch(function (error) {
+
+                    alert(
+                        "Unable to change mode: " +
+                        error.message
+                    );
+
+                });
+
+        }
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        function logout() {
+
+            auth.signOut()
+                .then(function () {
+
+                    window.location.href =
+                        "index.html";
+
+                })
+                .catch(function (error) {
+
+                    alert(
+                        "Logout failed: " +
+                        error.message
+                    );
+
+                });
+
+        }
+
+
+        /* =====================================================
+           HISTORY TABLE
+        ===================================================== */
+
+        function renderTable() {
+
+            const table =
+                document.getElementById(
+                    "historyTable"
+                );
+
+
+            table.innerHTML = "";
+
+
+            if (historyData.length === 0) {
+
+                table.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="6"
+            class="empty">
+
+            No sensor data available.
+
+          </td>
+
+        </tr>
+
+      `;
+
+                return;
+
+            }
+
+
+            const reversed =
+                [...historyData].reverse();
+
+
+            reversed.forEach(
+                function (item) {
+
+                    const row =
+                        document.createElement("tr");
+
+
+                    row.innerHTML = `
+
+          <td>
+            ${formatTimestamp(
+                        item.timestamp
+                    )}
+          </td>
+
+          <td>
+            ${item.temperature}
+          </td>
+
+          <td>
+            ${item.humidity}
+          </td>
+
+          <td>
+            ${item.ldr}
+          </td>
+
+          <td>
+            ${String(
+                        item.bulbState
+                    ).toUpperCase()}
+          </td>
+
+          <td>
+            ${String(
+                        item.mode
+                    ).toUpperCase()}
+          </td>
+
+        `;
+
+
+                    table.appendChild(row);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           TIMESTAMP FORMAT
+        ===================================================== */
+
+        function formatTimestamp(timestamp) {
+
+            const number =
+                Number(timestamp);
+
+
+            if (!isNaN(number)) {
+
+                return new Date(number)
+                    .toLocaleString();
+
+            }
+
+
+            return timestamp;
+
+        }
+
+
+        /* =====================================================
+           CHART
+        ===================================================== */
+
+        function renderChart() {
+
+            const canvas =
+                document.getElementById(
+                    "sensorChart"
+                );
+
+
+            const labels =
+                historyData.map(
+                    function (item) {
+
+                        return formatTimestamp(
+                            item.timestamp
+                        );
+
+                    }
+                );
+
+
+            const temperatures =
+                historyData.map(
+                    function (item) {
+
+                        return item.temperature;
+
+                    }
+                );
+
+
+            const humidity =
+                historyData.map(
+                    function (item) {
+
+                        return item.humidity;
+
+                    }
+                );
+
+
+            const ldr =
+                historyData.map(
+                    function (item) {
+
+                        /*
+                         LDR is divided by 10 only
+                         for graph visibility.
+                         Actual LDR values remain
+                         unchanged in the table.
+                        */
+
+                        return item.ldr / 10;
+
+                    }
+                );
+
+
+            if (sensorChart) {
+
+                sensorChart.destroy();
+
+            }
+
+
+            sensorChart =
+                new Chart(
+                    canvas,
+                    {
+
+                        type: "line",
+
+                        data: {
+
+                            labels: labels,
+
+                            datasets: [
+
+                                {
+
+                                    label:
+                                        "Temperature (°C)",
+
+                                    data:
+                                        temperatures,
+
+                                    tension: 0.3
+
+                                },
+
+                                {
+
+                                    label:
+                                        "Humidity (%)",
+
+                                    data:
+                                        humidity,
+
+                                    tension: 0.3
+
+                                },
+
+                                {
+
+                                    label:
+                                        "LDR / 10",
+
+                                    data:
+                                        ldr,
+
+                                    tension: 0.3
+
+                                }
+
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: false,
+
+                            interaction: {
+
+                                mode: "index",
+
+                                intersect: false
+
+                            },
+
+                            scales: {
+
+                                y: {
+
+                                    beginAtZero: true
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        /* =====================================================
+           CSV DOWNLOAD
+        ===================================================== */
+
+        function downloadCSV() {
+
+            if (historyData.length === 0) {
+
+                alert(
+                    "No historical data available."
+                );
+
+                return;
+
+            }
+
+
+            let csv =
+                "Timestamp,Temperature(C),Humidity(%),LDR,Bulb_State,Operating_Mode\n";
+
+
+            historyData.forEach(
+                function (item) {
+
+                    csv +=
+
+                        `"${formatTimestamp(
+                            item.timestamp
+                        )}",` +
+
+                        `${item.temperature},` +
+
+                        `${item.humidity},` +
+
+                        `${item.ldr},` +
+
+                        `"${item.bulbState}",` +
+
+                        `"${item.mode}"\n`;
+
+                }
+            );
+
+
+            const blob =
+                new Blob(
+                    [csv],
+                    {
+                        type:
+                            "text/csv;charset=utf-8;"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.href = url;
+
+            link.download =
+                "smarthome_sensor_history.csv";
+
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

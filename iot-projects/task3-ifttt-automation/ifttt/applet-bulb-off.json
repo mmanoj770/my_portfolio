@@ -1,0 +1,18 @@
+{
+  "applet": "Bulb Off",
+  "if_this": {
+    "service": "Google Assistant",
+    "trigger": "Activate scene",
+    "scene_name": "Bulb Off",
+    "spoken_phrase": "Hey Google, activate Bulb Off"
+  },
+  "then_that": {
+    "service": "Webhooks",
+    "action": "Make a web request",
+    "url": "https://io.adafruit.com/api/v2/YOUR_ADAFRUIT_IO_USERNAME/feeds/esp/data",
+    "method": "POST",
+    "content_type": "application/json",
+    "additional_headers": "X-AIO-Key: YOUR_ADAFRUIT_IO_KEY",
+    "body": { "value": "OFF" }
+  }
+}

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SmartHome - Login</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f5f7;
+      color: #111;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #3768d8;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .error {
+      background: #fdecea;
+      color: #b3261e;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .success {
+      background: #e6f4ea;
+      color: #19733a;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="login-box">
+
+      <h1 id="title">
+        SmartHome
+      </h1>
+
+      <p class="subtitle" id="subtitle">
+        Sign in to your SmartHome dashboard
+      </p>
+
+      <div id="message"></div>
+
+      <form id="authForm">
+
+        <div class="field">
+
+          <label for="email">
+            Email
+          </label>
+
+          <input id="email" type="email" placeholder="your@email.com" required>
+
+        </div>
+
+        <div class="field">
+
+          <label for="password">
+            Password
+          </label>
+
+          <input id="password" type="password" placeholder="Minimum 6 characters" minlength="6" required>
+
+        </div>
+
+        <button id="submitButton" type="submit">
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="switch" id="switchMode">
+        Don't have an account? Create one
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       FIREBASE CONFIG
+    ===================================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "YOUR_FIREBASE_WEB_API_KEY",
+
+      authDomain:
+        "YOUR_PROJECT_ID.firebaseapp.com",
+
+      databaseURL:
+        "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+
+      projectId:
+        "YOUR_PROJECT_ID",
+
+      storageBucket:
+        "YOUR_PROJECT_ID.firebasestorage.app",
+
+      messagingSenderId:
+        "YOUR_SENDER_ID",
+
+      appId:
+        "YOUR_APP_ID",
+
+      measurementId:
+        "YOUR_MEASUREMENT_ID"
+
+    };
+
+
+    /* =====================================================
+       INITIALIZE FIREBASE
+    ===================================================== */
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const form =
+      document.getElementById("authForm");
+
+    const emailInput =
+      document.getElementById("email");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const switchMode =
+      document.getElementById("switchMode");
+
+    const title =
+      document.getElementById("title");
+
+    const subtitle =
+      document.getElementById("subtitle");
+
+    const message =
+      document.getElementById("message");
+
+
+    /* =====================================================
+       LOGIN / REGISTER MODE
+    ===================================================== */
+
+    let registerMode = false;
+
+
+    switchMode.addEventListener("click", function () {
+
+      registerMode = !registerMode;
+
+      message.innerHTML = "";
+
+
+      if (registerMode) {
+
+        title.textContent =
+          "Create Account";
+
+        subtitle.textContent =
+          "Create your SmartHome account";
+
+        submitButton.textContent =
+          "Create Account";
+
+        switchMode.textContent =
+          "Already have an account? Sign in";
+
+      }
+
+      else {
+
+        title.textContent =
+          "SmartHome";
+
+        subtitle.textContent =
+          "Sign in to your SmartHome dashboard";
+
+        submitButton.textContent =
+          "Sign In";
+
+        switchMode.textContent =
+          "Don't have an account? Create one";
+
+      }
+
+    });
+
+
+    /* =====================================================
+       LOGIN / REGISTER
+    ===================================================== */
+
+    form.addEventListener("submit", async function (event) {
+
+      event.preventDefault();
+
+      const email =
+        emailInput.value.trim();
+
+      const password =
+        passwordInput.value;
+
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Please wait...";
+
+      message.innerHTML = "";
+
+
+      try {
+
+        if (registerMode) {
+
+          /* CREATE ACCOUNT */
+
+          await auth.createUserWithEmailAndPassword(
+            email,
+            password
+          );
+
+          message.innerHTML =
+            `<div class="success">
+             Account created successfully.
+           </div>`;
+
+        }
+
+        else {
+
+          /* SIGN IN */
+
+          await auth.signInWithEmailAndPassword(
+            email,
+            password
+          );
+
+        }
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Only after successful authentication
+         * go to dashboard.html.
+         */
+
+        window.location.href =
+          "dashboard.html";
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        let errorMessage =
+          error.message || "Authentication failed";
+
+
+        errorMessage =
+          errorMessage.replace(
+            "Firebase: ",
+            ""
+          );
+
+
+        message.innerHTML =
+          `<div class="error">
+           ${errorMessage}
+         </div>`;
+
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          registerMode
+            ? "Create Account"
+            : "Sign In";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
