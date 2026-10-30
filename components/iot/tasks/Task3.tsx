@@ -240,16 +240,23 @@ export default function Task3() {
         />
 
         <Sub>Automation tested under different conditions</Sub>
+        <Prose>
+          <p>
+            Test 1 was run and is recorded in the demo video and the applet&apos;s activity log (run 4 times). Tests 2–7 are the other
+            conditions I planned for; they show the behaviour I expect from how the chain is built, and I have not recorded results for
+            them yet.
+          </p>
+        </Prose>
         <DataTable
-          head={["#", "Condition", "What happened", "Why"]}
+          head={["#", "Condition", "Status", "Expected behaviour and why"]}
           rows={[
-            ["1", "“Activate Bulb On” with the bulb off", "Bulb turned on in about 2–3 s", "Normal path: scene → applet → REST → MQTT"],
-            ["2", "“Activate Bulb On” when it was already on", "Nothing visible changed; another ON appeared in the feed", "ON is idempotent — the relay is just set HIGH again"],
-            ["3", "Phone on mobile data, ESP32 on the lab hotspot", "Still worked", "Everything goes through the cloud; no shared network needed"],
-            ["4", "Voice ON, then dashboard OFF, then voice ON", "Bulb followed the latest command each time", "Both write to the same feed; last value wins"],
-            ["5", "ESP32 unplugged while “Bulb On” was spoken, then powered up", "Bulb came on shortly after boot", "The value was stored in the feed; esp->get() fetched it at startup"],
-            ["6", "simulate_ifttt.sh ON / OFF from a laptop", "Bulb switched without Google or IFTTT", "Isolates the Adafruit IO → ESP32 half when debugging"],
-            ["7", "A phrase that is not a scene name", "Nothing published, bulb unchanged", "Google Assistant never fires the trigger — a safe failure"],
+            ["1", "“Activate Bulb On” with the bulb off", "Tested — demo video, activity log", "Bulb turns on after a couple of seconds: scene → applet → Adafruit IO → MQTT → relay."],
+            ["2", "“Activate Bulb On” when it is already on", "Expected", "No visible change; another ON appears in the feed. ON just sets the relay HIGH again."],
+            ["3", "Phone on mobile data, ESP32 on the lab hotspot", "Expected", "Still works, because everything goes through the cloud."],
+            ["4", "Voice ON, then dashboard OFF, then voice ON", "Expected", "The bulb follows the latest command: both write to the same feed and the last value wins."],
+            ["5", "ESP32 powered off while the command is given, then powered on", "Expected", "Bulb comes on after boot: the value is kept in the feed and esp->get() fetches it."],
+            ["6", "simulate_ifttt.sh ON / OFF from a laptop", "Expected", "Bulb switches without Google or IFTTT, which isolates the Adafruit IO → ESP32 half."],
+            ["7", "A phrase that is not a scene name", "Expected", "Nothing is published and the bulb is unchanged, because the trigger never fires."],
           ]}
         />
       </DocSection>

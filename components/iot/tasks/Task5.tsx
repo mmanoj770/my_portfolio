@@ -254,21 +254,27 @@ export default function Task5() {
 
       <DocSection task={T} section="configuration">
         <Sub>LDR threshold / calibration method</Sub>
+        <Prose>
+          <p>
+            The automatic mode compares the smoothed LDR reading with a threshold stored in Firebase. The threshold in use is{" "}
+            <C>400</C>, shown on the dashboard. This is the method for choosing it, and the helper sketch below prints the numbers needed.
+          </p>
+        </Prose>
         <Steps
           items={[
-            <>Flashed <C>ldr_calibration.ino</C>, which prints the min / average / max of 50 raw readings every second, and opened the Serial Monitor at 115200.</>,
-            <>Recorded the average in three conditions: <strong>bright lab lighting</strong>, <strong>dim room</strong> (lights partly off), and <strong>dark</strong> (LDR covered with a hand).</>,
-            <>Chose a threshold between &ldquo;dim room&rdquo; and &ldquo;dark&rdquo;, so a passing shadow does not switch the bulb but real darkness does. That gave <C>ldrThreshold = 400</C>.</>,
-            <>Stored the threshold in Firebase (<C>smarthome/devices/esp32_001/ldrThreshold</C>) instead of hard-coding it. The ESP32 re-reads it every second, so it can be tuned from the Firebase console without re-flashing, and the dashboard shows the current value.</>,
-            <>Verified in Automatic mode: covering the LDR switched the bulb ON within about a second, uncovering it switched it OFF, and both changes appeared in the log with <C>mode: &quot;automatic&quot;</C>.</>,
+            <>Flash <C>ldr_calibration.ino</C>, which prints the min / average / max of 50 raw readings every second, and open the Serial Monitor at 115200.</>,
+            <>Note the average in three conditions: <strong>bright lab lighting</strong>, <strong>dim room</strong> (lights partly off), and <strong>dark</strong> (LDR covered with a hand).</>,
+            <>Choose a threshold between &ldquo;dim room&rdquo; and &ldquo;dark&rdquo;, so a passing shadow does not switch the bulb but real darkness does.</>,
+            <>Store it in Firebase (<C>smarthome/devices/esp32_001/ldrThreshold</C>) instead of hard-coding it. The ESP32 re-reads it every second, so it can be tuned from the Firebase console without re-flashing, and the dashboard shows the current value.</>,
+            <>Check in Automatic mode that covering the LDR switches the bulb ON, uncovering it switches it OFF, and the log shows <C>mode: &quot;automatic&quot;</C>.</>,
           ]}
         />
         <DataTable
-          head={["Condition", "Raw LDR reading", "Bulb in automatic mode"]}
+          head={["Condition", "Raw LDR reading", "Bulb in automatic mode", "Status"]}
           rows={[
-            ["Bright lab lighting", "≈ 1300 (1325 on the dashboard screenshot)", "OFF — far above 400"],
-            ["Dim room", "Lower, but still above 400", "OFF"],
-            ["Dark / LDR covered", "Below 400", "ON"],
+            ["Bright lab lighting", "1325 on the dashboard screenshot", "OFF — above the threshold of 400", "Seen in the screenshot (Automatic, threshold 400, bulb OFF)"],
+            ["Dim room", "Above 400 — to be measured", "OFF", "Expected"],
+            ["Dark / LDR covered", "Below 400 — to be measured", "ON", "Expected"],
           ]}
         />
         <SourceFile path={`${FOLDER}/firmware/ldr_calibration/ldr_calibration.ino`} />
