@@ -393,7 +393,7 @@ export default function Task4() {
         <EvidenceGroup
           title="Video demonstrating monitoring, control and the webpage workflow"
           items={[
-            { type: "video", src: "/media/iot/task4/webpage-workflow", label: "Screen recording — login → live dashboard → Turn ON / OFF → mode switch" },
+            { type: "video", src: "/media/iot/task4/webpage-workflow.mp4", label: "Lab demo — the web dashboard open on the laptop while the bulb on the breadboard setup switches", aspectRatio: "16/9" },
             { type: "video", src: "/media/iot/journey/video-lab.mp4", label: "Lab clip — bulb switched from the laptop dashboard" },
             { type: "video", src: "/media/iot/task4-hw/demo.mp4", label: "Bench test — ESP32 on the breadboard with Serial Monitor output" },
           ]}

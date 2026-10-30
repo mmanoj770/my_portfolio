@@ -303,6 +303,7 @@ export default function Task5() {
           title="Video demonstrating the complete system"
           items={[
             { type: "video", src: "/media/iot/task5/full-system", label: "Complete system — live data, manual control, automatic mode with the LDR, CSV download" },
+            { type: "video", src: "/media/iot/task4/webpage-workflow.mp4", label: "Complete prototype in the lab — dashboard on the laptop controlling the bulb", aspectRatio: "16/9" },
             { type: "video", src: "/media/iot/journey/video-lab.mp4", label: "Lab clip — bulb switched from the dashboard" },
           ]}
         />
