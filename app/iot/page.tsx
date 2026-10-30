@@ -9,6 +9,7 @@ import Task2 from "@/components/iot/tasks/Task2";
 import Task3 from "@/components/iot/tasks/Task3";
 import Task4 from "@/components/iot/tasks/Task4";
 import Task5 from "@/components/iot/tasks/Task5";
+import Insights from "@/components/iot/Insights";
 import { IOT_TASKS } from "@/data/iot-tasks";
 import { lineCount, repoTreeUrl } from "@/lib/iot-repo";
 import { Sparkles, ExternalLink, FolderGit2 } from "lucide-react";
@@ -67,6 +68,12 @@ export default function IoTPage() {
                   Task {t.n} · {t.short}
                 </a>
               ))}
+              <a
+                href="#insights"
+                className="rounded-full border border-signal/40 bg-signal/10 px-4 py-2 text-xs font-medium text-signal transition-colors hover:border-signal focus-ring"
+              >
+                Real use &amp; limits
+              </a>
             </div>
           </Reveal>
 
@@ -195,6 +202,7 @@ export default function IoTPage() {
         <Task3 />
         <Task4 />
         <Task5 />
+        <Insights />
 
         {/* ==================== BEHIND THE SCENES / JOURNEY ==================== */}
         <section id="journey" className="scroll-mt-28 border-t border-base-border pt-16 mb-24">
