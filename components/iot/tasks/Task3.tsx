@@ -171,7 +171,7 @@ export default function Task3() {
         <Sub>The exact request IFTTT sends (test script)</Sub>
         <Prose>
           <p>
-            To test the cloud half of the chain without speaking, this script sends the same request the applet's action makes (a POST to the feed's data endpoint).
+            To test the cloud half of the chain without speaking, this script sends the same request the applet&apos;s action makes (a POST to the feed&apos;s data endpoint).
           </p>
         </Prose>
         <SourceFile path={`${FOLDER}/ifttt/simulate_ifttt.sh`} />
@@ -266,7 +266,7 @@ export default function Task3() {
             [
               "Applet ran but the feed did not change",
               "The action only works if feed_name matches the feed key exactly (esp) and data is exactly ON or OFF.",
-              "Set feed_name to esp and data to ON / OFF, then checked the applet's activity and the esp feed history to confirm the value arrived."value\":\"ON\"}, and checked the result in the IFTTT activity log.",
+              "Set feed_name to esp and data to ON / OFF, then checked the applet's activity and the esp feed history to confirm the value arrived.",
             ],
             [
               "Hard to tell which link in the chain failed",
