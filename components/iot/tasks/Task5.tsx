@@ -173,6 +173,12 @@ export default function Task5() {
 
         <Sub>Database structure used for logs</Sub>
         <SourceFile path={`${FOLDER}/database-structure.json`} />
+        <Callout title="Two log layouts in my own project history">
+          My first logging version (Firebase project <C>forge-iot</C>, shown in the Evidence screenshots) pushed each reading under an
+          automatic push ID and stored the time in a <C>timestamp</C> field, with <C>bulbState</C> as true / false. The SmartHome version
+          documented here uses the epoch time itself as the key and stores <C>bulbState</C> as &ldquo;on&rdquo; / &ldquo;off&rdquo;. Both
+          record the same things: temperature, humidity, light level, bulb state, operating mode and a timestamp.
+        </Callout>
         <DataTable
           head={["Field", "Type", "Example", "Meaning"]}
           rows={[
@@ -286,7 +292,8 @@ export default function Task5() {
         <EvidenceGroup
           title="Screenshots of the Firebase log data"
           items={[
-            { src: "/media/iot/task5/firebase-logs", label: "Firebase RTDB — smarthome/sensorData/esp32_001 with timestamped rows", fit: "contain" },
+            { src: "/media/iot/task5/firebase-logs.jpg", label: "Firebase Realtime Database (project forge-iot) — one expanded log row: bulbState false, humidity 59, ldr 1387, mode “manual”, temperature 22.2, timestamp 1789121374298", fit: "contain" },
+            { src: "/media/iot/task5/firebase-logs-2.jpg", label: "Same log, another row — a new entry is added about every 3 s, each with its own timestamp", fit: "contain" },
             { src: "/media/iot/task4/firebase-rtdb-data", label: "Firebase RTDB — device node with status, mode and ldrThreshold", fit: "contain" },
           ]}
         />

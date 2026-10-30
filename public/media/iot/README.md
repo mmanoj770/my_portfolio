@@ -37,7 +37,7 @@ For the slots marked *add*, any of `.png`, `.jpg`, `.jpeg`, `.webp` (or `.mp4` f
 ## Add — Task 5 (logging & export)
 - ✅ done: `task5/ems01_history_2026-10-30.csv` (shown as a table on the page)
 - `task5/csv-opened` — that CSV opened in Excel / Google Sheets
-- `task5/firebase-logs` — Data tab with `smarthome/sensorData/esp32_001` expanded
+- ✅ done: `task5/firebase-logs.jpg`, `firebase-logs-2.jpg`
 - `task5/history-table` — the dashboard's Sensor History table
 - `task5/automatic-mode-dark` — Automatic mode with the LDR covered and the bulb ON
 - `task5/full-system` (video) — live data, manual control, automatic mode, CSV download
