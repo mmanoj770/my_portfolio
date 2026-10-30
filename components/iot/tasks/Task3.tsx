@@ -25,7 +25,7 @@ const FOLDER = "task3-ifttt-automation";
 export default function Task3() {
   return (
     <article id="task3" className="scroll-mt-28 border-t border-base-border pt-16 mb-28">
-      <TaskHeader task={T} title="IFTTT + Adafruit IO IoT Automation" meta="IFTTT · Google Assistant · Webhooks · Adafruit IO REST + MQTT · Day 3">
+      <TaskHeader task={T} title="IFTTT + Adafruit IO IoT Automation" meta="IFTTT · Google Assistant · Adafruit IO action · MQTT · Day 3">
         <ChecklistIndex
           task={T}
           items={[
@@ -93,7 +93,7 @@ export default function Task3() {
           head={["Part", "Meaning", "In my applet"]}
           rows={[
             ["Trigger (If This)", "The event IFTTT watches for", "Google Assistant: “Activate scene” → scene “Bulb On”"],
-            ["Action (Then That)", "What IFTTT does when the trigger fires", "Webhooks: POST {\"value\":\"ON\"} to the Adafruit IO feed esp"],
+            ["Action (Then That)", "What IFTTT does when the trigger fires", "Adafruit: Send data to Adafruit IO — feed_name esp, data ON"],
             ["Result", "What happens in the physical world", "Adafruit IO pushes ON over MQTT → ESP32 → relay → bulb lights"],
           ]}
         />
@@ -119,7 +119,7 @@ export default function Task3() {
             { title: "Adafruit IO broker", detail: "MQTT publish" },
             { title: "ESP32 → relay", detail: "bulb ON" },
           ]}
-          edges={["speech", "scene event", "HTTPS webhook", "store in feed", "MQTT push"]}
+          edges={["speech", "scene event", "Adafruit IO API", "store in feed", "MQTT push"]}
           caption="Communication / data-flow diagram. The dashboard toggle from Task 2 writes into the same feed, so voice and dashboard control stay in sync."
         />
         <Sub>How the trigger reaches the IoT system</Sub>
@@ -127,7 +127,7 @@ export default function Task3() {
           items={[
             <>I say &ldquo;Hey Google, activate Bulb On&rdquo;. Google Assistant matches the phrase to the scene <em>Bulb On</em>, which IFTTT created in my linked Google account.</>,
             <>Google notifies IFTTT that the scene was activated, which fires the <strong>Bulb On</strong> applet&apos;s trigger.</>,
-            <>The applet&apos;s Webhooks action sends <C>POST https://io.adafruit.com/api/v2/&lt;username&gt;/feeds/esp/data</C> with header <C>X-AIO-Key</C> and body <C>{`{"value":"ON"}`}</C>.</>,
+            <>The applet&apos;s action, <strong>Send data to Adafruit IO</strong>, calls the Adafruit IO API with <C>feed_name = esp</C> and <C>data = ON</C> (equivalent to <C>POST /api/v2/&lt;username&gt;/feeds/esp/data</C> with my key — see the test script).</>,
             <>Adafruit IO checks the key, saves &ldquo;ON&rdquo; as a new data point in the <C>esp</C> feed, and publishes it on the MQTT topic <C>&lt;username&gt;/feeds/esp</C>.</>,
             <>The ESP32, already subscribed since boot, receives it in <C>handleESPMessage()</C> and sets GPIO 26 HIGH. The relay clicks and the bulb lights, roughly 2–3 seconds after I finish speaking.</>,
           ]}
@@ -145,7 +145,7 @@ export default function Task3() {
             ["Phone with Google Assistant", "Voice input; the same Google account is linked to IFTTT"],
             ["IFTTT account (ifttt.com / app)", "Hosts the two applets"],
             ["Google Assistant service on IFTTT", "Trigger: Activate scene"],
-            ["Webhooks service on IFTTT", "Action: Make a web request"],
+            ["Adafruit service on IFTTT", "Action: Send data to Adafruit IO"],
             ["Adafruit IO (feed esp)", "REST API in, MQTT out"],
             ["Arduino IDE + Adafruit IO Arduino library", "ESP32 firmware (unchanged from Task 2)"],
           ]}
@@ -171,7 +171,7 @@ export default function Task3() {
         <Sub>The exact request IFTTT sends (test script)</Sub>
         <Prose>
           <p>
-            To test the cloud half of the chain without speaking, this script sends the same POST the Webhooks action sends.
+            To test the cloud half of the chain without speaking, this script sends the same request the applet's action makes (a POST to the feed's data endpoint).
           </p>
         </Prose>
         <SourceFile path={`${FOLDER}/ifttt/simulate_ifttt.sh`} />
@@ -183,25 +183,26 @@ export default function Task3() {
           items={[
             <>ifttt.com → <em>Create</em> → <strong>If This</strong> → search <em>Google Assistant</em> → connect my Google account.</>,
             <>Trigger <strong>&ldquo;Activate scene&rdquo;</strong> → scene name <C>Bulb On</C>. IFTTT adds the scene to Google Home, so the phrase is &ldquo;Hey Google, activate Bulb On&rdquo;.</>,
-            <><strong>Then That</strong> → <em>Webhooks</em> → <strong>&ldquo;Make a web request&rdquo;</strong>.</>,
-            <>URL <C>https://io.adafruit.com/api/v2/&lt;username&gt;/feeds/esp/data</C>, Method <C>POST</C>, Content Type <C>application/json</C>.</>,
-            <>Additional Headers <C>X-AIO-Key: &lt;my AIO key&gt;</C>, Body <C>{`{"value":"ON"}`}</C> → Create action → title &ldquo;Bulb On&rdquo; → Finish.</>,
-            <>Repeated for a second applet <strong>Bulb Off</strong> with scene <C>Bulb Off</C> and body <C>{`{"value":"OFF"}`}</C>.</>,
+            <><strong>Then That</strong> → search <em>Adafruit</em> → connect my Adafruit IO account → <strong>&ldquo;Send data to Adafruit IO&rdquo;</strong>.</>,
+            <>Action fields: <C>feed_name</C> = <C>esp</C> (the feed from Task 2), <C>data</C> = <C>ON</C>.</>,
+            <>Create action → Finish. IFTTT titles it &ldquo;If you say &lsquo;Okay Google, activate Bulb On&rsquo;, then Send data to esp feed&rdquo; and shows it as <strong>Connected</strong>.</>,
+            <>Repeated for a second applet <strong>Bulb Off</strong> with scene <C>Bulb Off</C> and <C>data</C> = <C>OFF</C>.</>,
           ]}
         />
         <Sub>Trigger used and action performed</Sub>
         <DataTable
           head={["Applet", "Trigger (If This)", "Action (Then That)", "Effect"]}
           rows={[
-            ["Bulb On", "Google Assistant · Activate scene “Bulb On”", "Webhooks · POST {\"value\":\"ON\"} → feeds/esp/data", "Bulb turns ON"],
-            ["Bulb Off", "Google Assistant · Activate scene “Bulb Off”", "Webhooks · POST {\"value\":\"OFF\"} → feeds/esp/data", "Bulb turns OFF"],
+            ["Bulb On", "Google Assistant · Activate scene “Bulb On”", "Adafruit · Send data to Adafruit IO — feed_name esp, data ON", "Bulb turns ON"],
+            ["Bulb Off", "Google Assistant · Activate scene “Bulb Off”", "Adafruit · Send data to Adafruit IO — feed_name esp, data OFF", "Bulb turns OFF"],
           ]}
         />
         <SourceFile path={`${FOLDER}/ifttt/applet-bulb-on.json`} title="applet-bulb-on.json — applet settings (key replaced)" />
-        <Callout title="Alternative action">
-          IFTTT&apos;s own <em>Adafruit</em> service (&ldquo;Send data to Adafruit IO&rdquo;, feed <C>esp</C>, data <C>ON</C>) does
-          the same thing without typing the URL and key; I documented the Webhooks version because it shows exactly what goes over
-          the network.
+        <Callout title="Team setup and alternative action">
+          The IFTTT applets and the Adafruit IO account were set up together with my teammate Arjun, so the screenshots below show his
+          IFTTT account (<C>arjunjr101</C>) and our shared Adafruit IO account (<C>johnwick221</C>). They are unedited. An IFTTT
+          Webhooks action that POSTs to the feed&apos;s REST endpoint does the same job; <C>applet-bulb-on.json</C> and
+          <C>simulate_ifttt.sh</C> document that equivalent request.
         </Callout>
       </DocSection>
 
@@ -209,10 +210,9 @@ export default function Task3() {
         <EvidenceGroup
           title="Screenshots of the IFTTT configuration"
           items={[
-            { src: "/media/iot/task3/ifttt-applets", label: "IFTTT — my Bulb On and Bulb Off applets", fit: "contain" },
-            { src: "/media/iot/task3/ifttt-trigger", label: "Trigger — Google Assistant “Activate scene: Bulb On”", fit: "contain" },
-            { src: "/media/iot/task3/ifttt-webhook", label: "Action — Webhooks request to Adafruit IO (key hidden)", fit: "contain" },
-            { src: "/media/iot/task3/ifttt-activity", label: "IFTTT activity log — applet runs with timestamps", fit: "contain" },
+            { src: "/media/iot/task3/ifttt-applets", label: "IFTTT applet — “If you say ‘Okay Google, activate Bulb On’, then Send data to esp feed” (Connected)", fit: "contain" },
+            { src: "/media/iot/task3/ifttt-trigger", label: "How it works — If: Google Assistant “Activate scene”; Then: Send data to Adafruit IO (feed_name, data)", fit: "contain" },
+            { src: "/media/iot/task3/ifttt-activity", label: "Applet activity — connected Sep 10, 2026, run 4 times", fit: "contain" },
           ]}
         />
         <EvidenceGroup
@@ -264,9 +264,9 @@ export default function Task3() {
               "Created scenes named Bulb On / Bulb Off, so the commands became “Hey Google, activate Bulb On / Off”.",
             ],
             [
-              "Applet ran but the feed did not change (webhook error)",
-              "The request needs the AIO key in an X-AIO-Key header and a JSON body with Content-Type application/json.",
-              "Put X-AIO-Key in Additional Headers, set Content Type to application/json, body {\"value\":\"ON\"}, and checked the result in the IFTTT activity log.",
+              "Applet ran but the feed did not change",
+              "The action only works if feed_name matches the feed key exactly (esp) and data is exactly ON or OFF.",
+              "Set feed_name to esp and data to ON / OFF, then checked the applet's activity and the esp feed history to confirm the value arrived."value\":\"ON\"}, and checked the result in the IFTTT activity log.",
             ],
             [
               "Hard to tell which link in the chain failed",
