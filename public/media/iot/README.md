@@ -31,7 +31,7 @@ For the slots marked *add*, any of `.png`, `.jpg`, `.jpeg`, `.webp` (or `.mp4` f
 - `task4/firebase-rtdb-data` — Realtime Database → Data tab with `smarthome` expanded
 - `task4/firebase-auth-users` — Authentication → Users list
 - `task4/firebase-rules` — Realtime Database → Rules tab
-- `task4/prototype` — photo of the ESP32 with DHT11, LDR and relay
+- ✅ done: `task4/prototype.jpg`
 - ✅ done: `task4/webpage-workflow.mp4` (lab demo). Still optional: a screen recording of login → dashboard → Turn ON/OFF
 
 ## Add — Task 5 (logging & export)

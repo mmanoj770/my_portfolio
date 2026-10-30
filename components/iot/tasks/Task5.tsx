@@ -296,7 +296,7 @@ export default function Task5() {
           items={[
             { src: "/media/iot/task5/lab-bulb-on-frame.jpg", label: "Complete system in the lab — bulb ON", aspectRatio: "16/9" },
             { src: "/media/iot/task5/lab-bulb-off-frame.jpg", label: "Complete system in the lab — bulb OFF", aspectRatio: "16/9" },
-            { src: "/media/iot/task4/prototype", label: "ESP32 with DHT11, LDR divider and relay" },
+            { src: "/media/iot/task4/prototype.jpg", label: "Prototype in the lab — bulb and wired breadboard on the table, web dashboard open on the laptop (28.5 °C, 26 %, light 555, bulb OFF)", aspectRatio: "auto", fit: "contain" },
           ]}
         />
         <EvidenceGroup
