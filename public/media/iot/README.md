@@ -15,9 +15,8 @@ For the slots marked *add*, any of `.png`, `.jpg`, `.jpeg`, `.webp` (or `.mp4` f
 - `journey/` — build journey photos and lab clips
 
 ## Add — Task 2 (Adafruit IO)
-- `task2/adafruit-dashboard` — the dashboard with the Bulb toggle
+- ✅ done: `task2/adafruit-dashboard`, `adafruit-new-block`, `adafruit-toggle-settings`
 - `task2/adafruit-feed` — the `esp` feed page showing ON / OFF history
-- `task2/adafruit-toggle-settings` — the Toggle block settings (ON text / OFF text)
 - `task2/serial-monitor` — Serial Monitor showing "Received from feed: ON"
 
 ## Add — Task 3 (IFTTT)

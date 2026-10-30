@@ -28,7 +28,7 @@ function DashboardLayout() {
     <figure className="rounded-2xl border border-base-border bg-base-surface p-4 md:p-6">
       <div className="mx-auto max-w-xl rounded-xl border border-base-border bg-base-raised/50 p-4">
         <div className="flex items-center justify-between border-b border-base-border pb-3">
-          <span className="font-display text-sm font-semibold text-ink">Dashboard: Smart Bulb</span>
+          <span className="font-display text-sm font-semibold text-ink">Dashboard: esp bulb</span>
           <span className="font-mono text-[11px] text-ink-faint">io.adafruit.com/&lt;username&gt;/dashboards</span>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-3">
@@ -266,7 +266,7 @@ export default function Task2() {
         <Sub>Dashboard configuration</Sub>
         <Steps
           items={[
-            <><em>Dashboards → New Dashboard</em> → name &ldquo;Smart Bulb&rdquo; → open it.</>,
+            <><em>Dashboards → New Dashboard</em> → name &ldquo;esp bulb&rdquo; (key <C>esp-bulb</C>) → open it.</>,
             <>Gear icon → <em>Create New Block</em> → <strong>Toggle</strong> → connect it to feed <C>esp</C>.</>,
             <>Block settings: title &ldquo;Bulb&rdquo;, <strong>Button On Text</strong> = <C>ON</C>, <strong>Button Off Text</strong> = <C>OFF</C> — exactly the strings the firmware compares.</>,
             <>Added a <strong>Stream</strong> block on the same feed to watch messages arrive live, which was useful for debugging.</>,
@@ -279,9 +279,10 @@ export default function Task2() {
         <EvidenceGroup
           title="Screenshots of the Adafruit IO dashboard and feed"
           items={[
-            { src: "/media/iot/task2/adafruit-dashboard", label: "Adafruit IO dashboard — Bulb toggle linked to feed esp", fit: "contain" },
+            { src: "/media/iot/task2/adafruit-dashboard", label: "Adafruit IO → Dashboards — my dashboard “esp bulb” (key esp-bulb), created 10 Sep", fit: "contain" },
+            { src: "/media/iot/task2/adafruit-new-block", label: "Create a new block — choosing the Toggle block for the bulb", fit: "contain" },
+            { src: "/media/iot/task2/adafruit-toggle-settings", label: "Connect a Feed — the Toggle block linked to feed esp (1 of 1 feeds selected)", fit: "contain" },
             { src: "/media/iot/task2/adafruit-feed", label: "Feed esp — history of ON / OFF values with timestamps", fit: "contain" },
-            { src: "/media/iot/task2/adafruit-toggle-settings", label: "Toggle block settings — ON text “ON”, OFF text “OFF”", fit: "contain" },
             { src: "/media/iot/task2/serial-monitor", label: "Serial Monitor — “Received from feed: ON / BULB -> ON”", fit: "contain" },
           ]}
         />

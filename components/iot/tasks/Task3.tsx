@@ -219,7 +219,7 @@ export default function Task3() {
           title="Screenshots of the Adafruit IO dashboard / feed"
           items={[
             { src: "/media/iot/task3/adafruit-feed", label: "Feed esp — values written by IFTTT arriving in the history", fit: "contain" },
-            { src: "/media/iot/task2/adafruit-dashboard", label: "Dashboard toggle updates when the voice command lands", fit: "contain" },
+            { src: "/media/iot/task2/adafruit-dashboard", label: "My Adafruit IO dashboard “esp bulb” — the same feed that IFTTT writes to", fit: "contain" },
           ]}
         />
         <EvidenceGroup
