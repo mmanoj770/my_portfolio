@@ -35,7 +35,7 @@ For the slots marked *add*, any of `.png`, `.jpg`, `.jpeg`, `.webp` (or `.mp4` f
 - `task4/webpage-workflow` (video) — screen recording: login → dashboard → Turn ON/OFF → mode switch
 
 ## Add — Task 5 (logging & export)
-- `task5/smarthome_sensor_history.csv` — the CSV downloaded from the dashboard (shown as a table on the page)
+- ✅ done: `task5/ems01_history_2026-10-30.csv` (shown as a table on the page)
 - `task5/csv-opened` — that CSV opened in Excel / Google Sheets
 - `task5/firebase-logs` — Data tab with `smarthome/sensorData/esp32_001` expanded
 - `task5/history-table` — the dashboard's Sensor History table

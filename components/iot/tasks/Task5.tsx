@@ -24,7 +24,7 @@ const T = 5;
 const FOLDER = "task5-logging-automation";
 const FIRMWARE = `${FOLDER}/firmware/smarthome_esp32/smarthome_esp32.ino`;
 const DASHBOARD = `${FOLDER}/web/dashboard.html`;
-const CSV_EXPORT = "/media/iot/task5/smarthome_sensor_history.csv";
+const CSV_EXPORT = "/media/iot/task5/ems01_history_2026-10-30.csv";
 
 const CSV_SCREENSHOT = "/media/iot/task5/csv-opened";
 
@@ -33,6 +33,7 @@ const CSV_SCREENSHOT = "/media/iot/task5/csv-opened";
 function DownloadedCsv() {
   const rows = readPublicCsv(CSV_EXPORT);
   const hasRows = rows !== null && rows.length > 1;
+  const firstChange = hasRows ? Math.max(1, rows.findIndex((r, i) => i > 1 && r[4] !== rows[1][4])) : 1;
   if (!hasRows && !resolveMedia(CSV_SCREENSHOT)) return null;
   return (
     <div className="space-y-4">
@@ -41,19 +42,24 @@ function DownloadedCsv() {
         <>
           <Prose>
             <p>
-              The table below is the actual <C>smarthome_sensor_history.csv</C> downloaded from my dashboard — {rows.length - 1}{" "}
-              timestamped rows with temperature, humidity, light level, bulb state and mode.{" "}
+              This is the actual CSV file downloaded from the EMS01 history page, <C>ems01_history_2026-10-30.csv</C>: {rows.length - 1}{" "}
+              timestamped readings logged on 17 Sep 2026 (12:26–13:52), with temperature, humidity, light level (DARK / BRIGHT) and bulb
+              state (ON / OFF).{" "}
               <a href={CSV_EXPORT} download className="text-signal underline underline-offset-2">
                 Download the file
               </a>
-              .
+              . Its columns differ slightly from the SmartHome dashboard&apos;s own export (no mode column; light is DARK / BRIGHT instead
+              of a number).
+            </p>
+            <p>
+              The table shows the rows around the first moment the bulb switched from OFF to ON as the light changed.
             </p>
           </Prose>
-          <DataTable head={rows[0]} rows={rows.slice(1, 21)} />
+          <DataTable head={rows[0]} rows={rows.slice(Math.max(1, firstChange - 6), firstChange + 14)} />
         </>
       )}
       <div className="md:max-w-2xl">
-        <Evidence src={CSV_SCREENSHOT} label="smarthome_sensor_history.csv opened in a spreadsheet" fit="contain" />
+        <Evidence src={CSV_SCREENSHOT} label="Downloaded CSV opened in a spreadsheet" fit="contain" />
       </div>
     </div>
   );
